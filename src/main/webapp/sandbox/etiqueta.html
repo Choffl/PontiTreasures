@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta name="description" content="Practica asignatura">
+		<meta name="keywords" content="moviles, upsam">
+		
+		<title>PontiTreasures web</title>
+		<link rel="stylesheet" href="css/baselayout.css"/>
+		<link rel="stylesheet" href="css/mainlayout.css"/>
+		<link rel="stylesheet" href="css/gestionlayout.css"/>
+		<link rel="stylesheet" href="css/detaillayout.css"/>
+		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		
+		
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+		
+		
+		<script>
+		var map;
+		function initialize() {
+		  var mapOptions = {
+		    zoom: 8,
+		    center: new google.maps.LatLng(-34.397, 150.644),
+		    mapTypeId: google.maps.MapTypeId.ROADMAP
+		  };
+		  map = new google.maps.Map(document.getElementById('mapa'), mapOptions);
+		}
+
+		google.maps.event.addDomListener(window, 'load', initialize);
+		</script>
+	</head>
+
+	<body>
+		<div id="pagina">
+			<header id="cabecera">
+				<nav id="secciones">
+					<ul>
+						<li class="acciones"><a href="#">Etiquetas</a></li>
+						<li class="acciones"><a href="#">Paginas</a></li>
+						<li class="acciones"><a href="#">Circuitos</a></li>
+						<li class="acciones"><a href="#">Gestores</a></li>
+						<li class="acciones"><a href="#">Cazas</a></li>
+					</ul>
+				</nav>
+				<nav id="aplicacion">
+					<ul>
+						<li class="acciones"><a href="#">Cuenta</a></li>
+						<li class="acciones"><a href="#">Logout</a></li>
+
+					</ul>
+				</nav>
+			</header>
+			
+			<section>
+				<header class="tituloSeccion">
+					<h1>Etiquetas QR</h1>
+				</header>
+				<div id="contenidoSeccion">
+					<article>
+						<div id="info">
+							<p class="dataInfo">
+								<span class="tituloInfo">Codigo:</span>
+								<span class="contenidoInfo">Codigo de la etiqueta</span>
+							</p>
+							<p>
+								<span class="tituloInfo">Descripcion:</span>
+								<span class="contenidoInfo">Descripcion mas o menos larga de la etiqueta.</span>
+							</p>
+							<p>
+								<span class="tituloInfo">Pista para anonimos:</span>
+								<span class="contenidoInfo">Nombre la pagina jQuery para anonimos.</span>
+							</p>
+							<p>
+								<span class="tituloInfo">Pista para identificados:</span>
+								<span class="contenidoInfo">Nombre la pagina jQuery para identificados.</span>
+							</p>
+
+						</div>
+						<div id="qr" class="imagen">
+							<img alt="codigo qr" src="img/qrcode.png">
+						</div>
+						<div id="mapa" style="height: 400px;">
+						</div>
+					</article>
+				</div>
+				
+			</section>
+			<footer id="pie">
+				Derechos reservadors &copy; 2012-2013
+			</footer>
+		</div>
+	</body>
+
+</html>

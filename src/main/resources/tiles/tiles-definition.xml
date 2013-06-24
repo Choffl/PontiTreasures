@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+	
+	<tiles-definitions>
+	
+		<definition name="central_template" template="/WEB-INF/jsp/templates/centralTemplate.jsp">
+	    </definition>
+	    
+		<definition name="full_template" template="/WEB-INF/jsp/templates/fullTemplate.jsp">
+		</definition>
+	       
+	    
+	    
+	    <!-- VISTAS CORRESPONDIENTES AL LOGIN -->
+	    <definition name="aplicacion/login" extends="full_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/login.jsp" />
+	    </definition>	    
+	    	    
+	   	<definition name="aplicacion/jugador/alta" extends="full_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/alta.jsp" />
+	    </definition>
+	    
+	   	<!-- VISTAS CORRESPONDIENTES A CAZAS -->
+	    <definition name="cazas" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/cazas.jsp" />
+	    </definition>
+	    
+	   	<!-- VISTAS CORRESPONDIENTES A ETIQUETAS -->
+	    <definition name="etiquetas" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/etiquetas.jsp" />
+	    </definition>
+	   	<definition name="etiqueta" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/etiqueta.jsp" />
+	    </definition>
+	    
+	   	<!-- VISTAS CORRESPONDIENTES A CIRCUITOS -->
+	    <definition name="circuitos" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/circuitos.jsp" />
+	    </definition>	 	    
+	    	    
+	    	    
+	    <!-- VISTAS CORRESPONDIENTES A PAGINAS -->
+	    <definition name="paginas" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/paginas.jsp" />
+	    </definition>
+	   	 <definition name="pagina" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/pagina.jsp" />
+	    </definition>	 	    
+	    	    
+	    	    
+	    <!-- VISTAS CORRESPONDIENTES A GESTORES -->
+	    <definition name="gestores" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/gestores.jsp" />
+	    </definition>	 	    
+	    	    	 	    
+	    	    
+	    
+	</tiles-definitions>

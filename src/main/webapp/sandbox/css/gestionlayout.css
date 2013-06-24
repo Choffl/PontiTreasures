@@ -1,0 +1,102 @@
+
+i {
+    margin-right: 5px;
+}
+
+.listado-acciones{
+	float: right;
+    padding-right: 60px;
+    text-align: right;
+}
+
+.listado-acciones i{
+	padding:12px;
+}
+
+.listado-acciones a{
+	color: #67AED4;
+}
+
+.listado-acciones a:hover{
+	color: #FFCD46;
+}
+
+.listado .elemento > .caza{
+    border-left: 3px solid transparent;
+    overflow: hidden;
+    padding: 0 13px;		
+}
+
+.nombreElemento{
+	float: left;
+	padding-left: 0;
+}
+
+.nombreElemento a {
+    color: #67AED4;
+}
+
+
+.listado li.elemento{
+	background-image: -moz-linear-gradient(left center , #3580A9, #67AED4);
+	background-image: -moz-linear-gradient(left center , #3580A9, #67AED4);
+ 	background-image: -webkit-linear-gradient(left, #3580A9, #67AED4);
+ 	background-image: -webkit-gradient(linear, left center , #3580A9, #67AED4);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+	padding: 3px 0 2px;
+    width: 100%;	
+}
+.listado li.elemento:last-child{
+   	background-image: -moz-linear-gradient(center top , #FF7046, #FFB099);
+ 	background-image:  -webkit-linear-gradient(top, #FF7046, #FFB099);
+ 	background-image: -webkit-gradient(linear, center top , #FF7046, #FFB099);
+ 	background-position: center bottom;
+   	background-repeat: no-repeat;
+   	background-size: 100% 1px;
+   	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+	padding: 1px 0 10px;
+    width: 100%;	
+}
+
+.listado-acciones li{
+    display: inline-block;
+    line-height: 44px;
+    vertical-align: middle;
+    visibility: hidden;	
+}
+
+.listado .elemento:hover > .caza{
+    border-color: #FF7046;		
+}
+
+.listado .elemento:hover .listado-acciones li{
+    visibility: visible;	
+}
+
+.accionAlta{
+	padding: 18px 6px;
+}
+
+.accionAlta > a{
+    vertical-align: 6px;
+}
+
+.accionAlta > a{
+    vertical-align: 6px;
+    color: #FFCD46;
+}
+
+.accionAlta > i{
+    color: #67AED4;
+}
+
+.accionAlta:hover > i{
+    color: #FFCD46;
+}
+
+.formDialog{
+	display: none;
+}
+

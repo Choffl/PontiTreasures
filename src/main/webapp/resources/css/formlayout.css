@@ -1,0 +1,121 @@
+
+section .formDialog{
+ 	background: none repeat scroll 0 0 rgba(255, 227, 153, 0.8);
+    border-radius: 4px 4px 4px 4px;
+    color: #67AED4;
+    margin: auto auto 2%;
+    max-width: 70%;
+    padding: 2%;
+}
+
+body .dialog {
+	background: none repeat scroll 0 0 #FFF;
+   	border-radius: 4px 4px 4px 4px;
+   	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2), 0 1px 5px rgba(0, 0, 0, 0.2), 0 0 0 12px rgba(255, 255, 255, 0.4);
+   	margin: auto auto 2%;
+   	max-width: 95%;
+   	padding: 1%;
+	position:relative;
+	text-align: left;
+ 	color: #67AED4;
+}
+
+
+form h2{
+	font-family: hybrea,"helvetica neue",helvetica,arial,geneva,sans-serif;
+   	background-image: -moz-linear-gradient(center top , #FF7046, #FFB099);
+ 	background-image:  -webkit-linear-gradient(top, #FF7046, #FFB099);
+ 	background-image: -webkit-gradient(linear, center top , #FF7046, #FFB099);
+ 	background-position: center bottom;
+   	background-repeat: no-repeat;
+   	background-size: 100% 1px;
+   	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+   	font-size: 22px;
+   	font-weight: bold;
+   	padding-bottom: 8px;
+   	text-shadow: 0 2px 0 rgba(255, 255, 255, 0.8);
+	text-align: center;
+}
+
+form input[type="submit"]{
+    background: linear-gradient(#FFB099, #FF7046) repeat scroll 0 0 transparent;
+    background: -moz-linear-gradient(#FFB099, #FF7046) repeat scroll 0 0 transparent;
+ 	background-image:  -webkit-linear-gradient(#FFB099, #FF7046) repeat scroll 0 0 transparent;
+ 	background-image: -webkit-gradient(#FFB099, #FF7046) repeat scroll 0 0 transparent;
+    border: 1px solid #FF7046;
+   	color: #2C769D;
+   	margin-right: 3%;
+   	text-shadow: 0 1px rgba(255, 255, 255, 0.3);
+ 	border-radius: 3px 3px 3px 3px;
+   	box-shadow: 0 1px rgba(255, 255, 255, 0.3) inset;
+   	cursor: pointer;
+   	float: right;
+    font-family: 'Lato',Calibri,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 38px;
+    line-height: 38px;
+    position: relative;
+    text-align: center;
+    width: 19%;
+}
+
+form input[type="button"]{
+    background: linear-gradient(#FFB099, #FF7046) repeat scroll 0 0 transparent;
+    background: -moz-linear-gradient(#FFB099, #FF7046) repeat scroll 0 0 transparent;
+ 	background-image:  -webkit-linear-gradient(#FFB099, #FF7046) repeat scroll 0 0 transparent;
+ 	background-image: -webkit-gradient(#FFB099, #FF7046) repeat scroll 0 0 transparent;
+    border: 1px solid #FF7046;
+   	color: #2C769D;
+   	margin-right: 3%;
+   	text-shadow: 0 1px rgba(255, 255, 255, 0.3);
+ 	border-radius: 3px 3px 3px 3px;
+   	box-shadow: 0 1px rgba(255, 255, 255, 0.3) inset;
+   	cursor: pointer;
+   	float: right;
+    font-family: 'Lato',Calibri,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 38px;
+    line-height: 38px;
+    position: relative;
+    text-align: center;
+    width: 19%;
+}
+
+fieldset.submit{
+	padding: 10px 0;
+}
+
+
+.field{
+	margin: 15px 0;
+}
+
+.field label {
+    font-size: 12px;
+    margin-bottom: 2px;
+	display:block;
+}
+
+.field input.text {
+    width: 95%;
+}
+
+
+.field input.text{
+	background: rgba(255, 112, 70, 0.1);
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 7px;
+}
+
+span.errorMessages {
+    color: red;
+    font-size: 14px;
+    text-align: center !important;
+}
+
+#registrar{
+	float: right;
+}

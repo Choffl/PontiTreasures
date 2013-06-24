@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="es">	<head>		<meta http-equiv="content-type" content="text/html;charset=utf-8" />		<meta name="description" content="Practica asignatura">		<meta name="keywords" content="moviles, upsam">				<title>PontiTreasures web</title>
+		<link rel="stylesheet" href="css/baselayout.css"/>		<link rel="stylesheet" href="css/login.css"/>	</head>	<body>
+		<header>
+			<h1>PontiTreasures</h1>
+		</header>
+		<section>
+			<div id="alta" class="dialog">
+				<form method="post" class="panel-body" action="/alta">
+					<h2>Registro usuario</h2>
+					<fieldset>						<div class="field">							<label for="username">Usuario</label>							<input type="text" size="43" name="username" id="username" class="text">						</div>
+						<div class="field">
+							<label for="email">Email</label>
+							<input type="email" size="43" name="email" id="email" class="text">
+						</div>
+						<div class="field">
+							<label for="password">Password</label>
+							<input type="password" size="43" name="password" id="password" class="text password">
+						</div>						<div class="field">							<label for="password">Repita password</label>							<input type="password" size="43" name="r_password" id="r_password" class="text password">						</div>
+					</fieldset>
+					<fieldset class="submit">
+						<input type="submit" value="Alta" name="commit" class="submit">
+					</fieldset>
+				</form>
+			</div>
+
+
+		</section>
+	</body></html>

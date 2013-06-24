@@ -1,0 +1,85 @@
+
+section {
+    min-height: 85%;
+}
+
+#pagina{
+    margin: auto;
+    max-width: 60%;
+	height: 100%;
+    background-color: #FFF;
+	/* background-color: #FFF8F0; */
+}
+
+#cabecera{
+    margin: 0 25px;
+	padding: 4% 0 5px;
+}
+
+#cabecera nav{	
+	padding: 0 16px;
+}
+
+#aplicacion{
+	float: right;
+}
+
+#secciones{
+	float: left;
+}
+
+.acciones:first-child{
+	background: none repeat scroll 0 0 transparent;
+}
+
+.acciones a{
+    color: #67AED4;
+    /* color: 114D6E */
+}
+
+.acciones a:hover, .acciones a:active{
+    color: #FFCD46;
+}
+
+.acciones{
+    background-image: -moz-linear-gradient(center top , #FF7046, #FFB099);
+ 	background-image:  -webkit-linear-gradient(top, #FF7046, #FFB099);
+ 	background-image: -webkit-gradient(linear, center top , #FF7046, #FFB099);
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 1px 100%;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 5px;
+	margin-bottom: 5px;
+    padding-left: 7px;
+}
+
+.tituloSeccion{
+	/* background-color: #6BBA70; */
+	background: -webkit-gradient(linear, left top, right top, from(#FF7046), to(#FFB099));
+	background: -webkit-linear-gradient(left, #FF7046, #FFB099);
+ 	background: -moz-linear-gradient(left, #FF7046, #FFB099);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+	-moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+	padding: 10px;
+	margin: 0 -3%;
+}
+
+.tituloSeccion h1{
+    color: #FFFFFF;
+	padding: 5px 16px;
+}
+
+#contenidoSeccion{
+	padding: 2% 4%;
+	height: 100%;
+}
+
+
+
+
+

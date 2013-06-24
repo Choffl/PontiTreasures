@@ -1,0 +1,38 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+*:focus {
+    outline: 0;
+}
+
+html,body{
+	height: 100%;
+	width: 100%;
+}
+
+header, section, footer,p {
+	display:block;
+	clear:both;
+}
+
+body{
+    background-color: #3581A9;
+    color: #444444;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 19px;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+ol, ul {
+    list-style: none outside none;
+}
+
+fieldset{
+	border: none;
+}

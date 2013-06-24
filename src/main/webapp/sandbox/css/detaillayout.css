@@ -1,0 +1,43 @@
+
+article{
+	padding: 2%;
+	max-width: 90%;
+	height: 100%;	
+}
+
+#info{
+    float: left;
+    max-width: 70%;
+    padding-top: 3%;	
+}
+
+.dataInfo{
+	
+}
+
+.dataInfo span{
+	
+}
+
+.tituloInfo{
+	color:#67AED4;
+	font-weight: bold;
+}
+
+.contenidoInfo{
+	
+}
+
+#qr{
+    float: right;
+    max-width: 30%;	
+    text-align: right;
+}
+
+img{
+	 max-width: 90%;
+}
+
+#mapa{
+	clear:both;
+}
