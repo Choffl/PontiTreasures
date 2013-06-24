@@ -12,6 +12,7 @@
         <tiles.version>3.0.1</tiles.version>
         <slf4j.version>1.5.8</slf4j.version>
         <hibernate-core-version>4.2.2.Final</hibernate-core-version>
+        <jetty.skip>${skipTests}</jetty.skip> 
   </properties>
   
   

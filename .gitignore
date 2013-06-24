@@ -10,3 +10,4 @@ salida/
 .project
 ./settings/
 .classpath
+/bin
