@@ -111,12 +111,13 @@
 		<artifactId>hibernate-validator</artifactId>
 		<version>5.0.1.Final</version>
 	</dependency>
-  	
-  	<dependency>
-  		<groupId>postgresql</groupId>
-  		<artifactId>postgresql</artifactId>
-  		<version>9.1-901-1.jdbc4</version>
-  	</dependency>
+
+    <dependency>
+	  	<groupId>postgresql</groupId>
+	  	<artifactId>postgresql</artifactId>
+		<version>9.1-901-1.jdbc4</version>
+	</dependency>
+
   	
   	<dependency>
             <groupId>commons-dbcp</groupId>
@@ -200,6 +201,8 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>7.4.2.v20110526</version>
                 <configuration>
+                	<stopPort>9966</stopPort>
+          			<stopKey>stopit</stopKey>
                     <webAppConfig>
                         <contextPath>/${project.name}</contextPath>
                     </webAppConfig>
