@@ -31,4 +31,10 @@ public interface JugadoresServicio {
 	 */
 	Boolean isNombreUsuarioRegistrado(String username);
 
+	/**
+	 * @param id
+	 * @param identificador
+	 */
+	void registraIdentificador(Long id, String identificador);
+
 }

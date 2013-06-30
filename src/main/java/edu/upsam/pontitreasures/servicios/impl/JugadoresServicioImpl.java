@@ -26,15 +26,23 @@ public class JugadoresServicioImpl implements JugadoresServicio{
 	}
 
 	@Override
-	@Transactional(readOnly=true, propagation=Propagation.REQUIRED)
+	@Transactional(readOnly=true, propagation=Propagation.SUPPORTS)
 	public Boolean isEmailRegistrado(String email) {
 		return false;
 	}
 
 	@Override
-	@Transactional(readOnly=true, propagation=Propagation.REQUIRED)
+	@Transactional(readOnly=true, propagation=Propagation.SUPPORTS)
 	public Boolean isNombreUsuarioRegistrado(String username) {
 		return false;
+	}
+
+	@Override
+	@Transactional(readOnly=false, propagation=Propagation.REQUIRED)
+	public void registraIdentificador(Long id, String identificador) {
+		Jugador jugador = (Jugador)jugadoresRepository.recuperarPorId(id);
+		jugador.setIdentificador(identificador);
+		jugadoresRepository.actualizar(jugador);
 	}
 
 }

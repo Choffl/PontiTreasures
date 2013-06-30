@@ -1,24 +1,11 @@
 package edu.upsam.pontitreasures.vista.json;
 
-public class JugadorJSON {
+public class LoginJSON {
 	
-	private String userName;
 	private String email;
 	private String password;
 	private String identificador;
 	
-	/**
-	 * @return the userName
-	 */
-	public String getUserName() {
-		return userName;
-	}
-	/**
-	 * @param userName the userName to set
-	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 	/**
 	 * @return the email
 	 */
@@ -55,7 +42,6 @@ public class JugadorJSON {
 	public void setIdentificador(String identificador) {
 		this.identificador = identificador;
 	}
-	
 	
 
 }
