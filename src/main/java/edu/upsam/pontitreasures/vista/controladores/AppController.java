@@ -34,7 +34,7 @@ public class AppController {
 	}
 
 
-	@RequestMapping(value="/app/jugador", method=RequestMethod.POST)
+	@RequestMapping(value="/jugador", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	public void altaAppJugador(@RequestBody JugadorJSON jugadorJSON){
 		jugadoresServicio.alta(jugadorJSON.getUserName(), jugadorJSON.getEmail(), jugadorJSON.getPassword());
