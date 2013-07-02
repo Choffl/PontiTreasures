@@ -16,45 +16,24 @@ public class CazaForm implements Serializable{
 	 * id para la serializacion
 	 */
 	private static final long serialVersionUID = -3512998172152288415L;
-	
+
 
 	private String nombre;
-	
 
-	private String fechaInicio;
-	
+	private String premio;
 
-	private String fechaFin;
-	
+	private String mencion;
 
 	private Long circuitoId;
-	
+
 
 	private Long gestorId;
-	
-	public Date getValorFechaInicio(){
-		Date fecha = new Date();
-		DateFormat dateFormat = DateFormat.getInstance();	
-		try {
-			fecha = new Date(dateFormat.parse(getFechaInicio()).getTime());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return fecha;
-	}
-	
-	public Date getValorFechaFin(){
-		Date fecha = new Date();
-		DateFormat dateFormat = DateFormat.getInstance();	
-		try {
-			fecha = new Date(dateFormat.parse(getFechaFin()).getTime());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return fecha;
-	}
+
+
+	private Long idPaginaPremioIdentificado;
+
+
+	private Long idPaginaPremioAnonimo;
 
 	/**
 	 * @return the nombre
@@ -68,34 +47,6 @@ public class CazaForm implements Serializable{
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	/**
-	 * @return the fechaInicio
-	 */
-	public String getFechaInicio() {
-		return fechaInicio;
-	}
-
-	/**
-	 * @param fechaInicio the fechaInicio to set
-	 */
-	public void setFechaInicio(String fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
-
-	/**
-	 * @return the fechaFin
-	 */
-	public String getFechaFin() {
-		return fechaFin;
-	}
-
-	/**
-	 * @param fechaFin the fechaFin to set
-	 */
-	public void setFechaFin(String fechaFin) {
-		this.fechaFin = fechaFin;
 	}
 
 	/**
@@ -125,7 +76,63 @@ public class CazaForm implements Serializable{
 	public void setGestorId(Long gestorId) {
 		this.gestorId = gestorId;
 	}
-	
-	
+
+	/**
+	 * @return the premio
+	 */
+	public String getPremio() {
+		return premio;
+	}
+
+	/**
+	 * @param premio the premio to set
+	 */
+	public void setPremio(String premio) {
+		this.premio = premio;
+	}
+
+	/**
+	 * @return the mencion
+	 */
+	public String getMencion() {
+		return mencion;
+	}
+
+	/**
+	 * @param mencion the mencion to set
+	 */
+	public void setMencion(String mencion) {
+		this.mencion = mencion;
+	}
+
+	/**
+	 * @return the idPaginaPremioIdentificado
+	 */
+	public Long getIdPaginaPremioIdentificado() {
+		return idPaginaPremioIdentificado;
+	}
+
+	/**
+	 * @param idPaginaPremioIdentificado the idPaginaPremioIdentificado to set
+	 */
+	public void setIdPaginaPremioIdentificado(Long idPaginaPremioIdentificado) {
+		this.idPaginaPremioIdentificado = idPaginaPremioIdentificado;
+	}
+
+	/**
+	 * @return the idPaginaPremioAnonimo
+	 */
+	public Long getIdPaginaPremioAnonimo() {
+		return idPaginaPremioAnonimo;
+	}
+
+	/**
+	 * @param idPaginaPremioAnonimo the idPaginaPremioAnonimo to set
+	 */
+	public void setIdPaginaPremioAnonimo(Long idPaginaPremioAnonimo) {
+		this.idPaginaPremioAnonimo = idPaginaPremioAnonimo;
+	}
+
+
 
 }

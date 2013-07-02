@@ -101,20 +101,24 @@ public class AplicacionController {
 	 * @return
 	 */
 	@RequestMapping(value="/jugador/alta", method=RequestMethod.POST)
-	public String altaUsuario(@Valid JugadorForm jugadorForm, Model model, Errors errors){
+	public String altaUsuario(@Valid JugadorForm jugadorForm, Errors errors){
 		if(!isDatosJugadorValidos(jugadorForm, errors)){
 			return "aplicacion/jugador/alta";
 		}
 		
-		Usuario usuarioEnSession = jugadoresServicio.alta(jugadorForm.getUsername(), jugadorForm.getEmail(), jugadorForm.getPassword());
-		model.addAttribute("usuarioEnSession", usuarioEnSession);
+		jugadoresServicio.alta(jugadorForm.getUsername(), jugadorForm.getEmail(), jugadorForm.getPassword());
 		return "redirect:/aplicacion/jugador/app";
+	}
+	
+	@RequestMapping(value="/jugador/app", method=RequestMethod.GET)
+	public void juegaApp(){
+
 	}
 	
 	/**
 	 * 
 	 */
-	@RequestMapping(value="/salir", method=RequestMethod.GET)
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(SessionStatus status, ModelMap model, HttpServletRequest request){
 	    model.clear();
 	    status.setComplete();

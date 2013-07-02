@@ -21,4 +21,27 @@ public interface EtiquetasRepository {
 	 */
 	Etiqueta recuperarPorId(Long id);
 
+	/**
+	 * @param etiqueta
+	 */
+	void agregar(Etiqueta etiqueta);
+
+	/**
+	 * @param etiquetaId
+	 */
+	void eliminar(Long etiquetaId);
+
+	/**
+	 * @param etiquetaId
+	 * @return
+	 */
+	boolean consultaAsociadoCircuito(Long etiquetaId);
+
+	/**
+	 * @param string
+	 * @param codigoQR
+	 */
+	Etiqueta recuperarUnicoPor(String campo, String valor);
+
+
 }

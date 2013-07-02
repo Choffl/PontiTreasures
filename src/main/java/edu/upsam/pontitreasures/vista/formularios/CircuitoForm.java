@@ -1,6 +1,8 @@
 package edu.upsam.pontitreasures.vista.formularios;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * @author ssabariego
@@ -16,6 +18,8 @@ public class CircuitoForm implements Serializable{
 	private String nombre;
 	
 	private String descripcion;
+	
+	private Collection<Long> etiquetas = new HashSet<Long>();
 
 	/**
 	 * @return the nombre
@@ -43,6 +47,20 @@ public class CircuitoForm implements Serializable{
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	/**
+	 * @return the etiquetas
+	 */
+	public Collection<Long> getEtiquetas() {
+		return etiquetas;
+	}
+
+	/**
+	 * @param etiquetas the etiquetas to set
+	 */
+	public void setEtiquetas(Collection<Long> etiquetas) {
+		this.etiquetas = etiquetas;
 	}
 	
 	

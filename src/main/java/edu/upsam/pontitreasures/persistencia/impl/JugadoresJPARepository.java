@@ -1,6 +1,7 @@
 package edu.upsam.pontitreasures.persistencia.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,6 +13,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import edu.upsam.pontitreasures.dominio.Jugador;
+import edu.upsam.pontitreasures.dominio.Usuario;
 import edu.upsam.pontitreasures.persistencia.JugadoresRepository;
 
 @Repository(value="jugadoresRepository")
@@ -44,7 +46,8 @@ public class JugadoresJPARepository implements JugadoresRepository{
 		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(propiedad), valor));
 		 
 		TypedQuery<Jugador> typedQuery = entityManager.createQuery(criteriaQuery);
-		return typedQuery.getSingleResult();
+		List<Jugador> resultados = typedQuery.getResultList();
+		return resultados.isEmpty()?null:resultados.get(0);
 	}
 
 	@Override

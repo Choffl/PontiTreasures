@@ -17,7 +17,7 @@
 	<ul class="listado">
 		<c:forEach items="${gestores}" var="gestor">
 			<li class="elemento">
-				<div class="gestor">
+				<div class="item">
 					<hgroup class="nombreElemento">
 						<h2>
 							<i class="icon-user"></i>

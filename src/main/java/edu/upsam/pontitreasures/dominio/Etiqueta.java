@@ -11,8 +11,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+
+import edu.upsam.pontitreasures.servicios.PaginasServicio;
 
 /**
  * @author ssabariego
@@ -62,6 +66,28 @@ public class Etiqueta implements Serializable {
 	@Column(precision=18, scale=14)
 	private BigDecimal longitud;
 	
+	/**
+	 * 
+	 */
+	@ManyToOne
+	private PaginaJuego paginaCheckinAnonimo;
+	
+	/**
+	 * 
+	 */
+	@ManyToOne
+	private PaginaJuego paginaCheckinIdentificado;
+	
+	public Etiqueta(){
+		
+	}
+
+	public Etiqueta(String codigo, String descripcion, BigDecimal latitudValor, BigDecimal longitudValor) {
+		this.codigo = codigo;
+		this.descripcion = descripcion;
+		this.latitud = latitudValor;
+		this.longitud = longitudValor;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -155,6 +181,34 @@ public class Etiqueta implements Serializable {
 	 */
 	public Long getId() {
 		return id;
+	}
+
+	/**
+	 * @return the paginaCheckinAnonimo
+	 */
+	public PaginaJuego getPaginaCheckinAnonimo() {
+		return paginaCheckinAnonimo;
+	}
+
+	/**
+	 * @param paginaCheckinAnonimo the paginaCheckinAnonimo to set
+	 */
+	public void setPaginaCheckinAnonimo(PaginaJuego paginaCheckinAnonimo) {
+		this.paginaCheckinAnonimo = paginaCheckinAnonimo;
+	}
+
+	/**
+	 * @return the paginaCheckinIdentificado
+	 */
+	public PaginaJuego getPaginaCheckinIdentificado() {
+		return paginaCheckinIdentificado;
+	}
+
+	/**
+	 * @param paginaCheckinIdentificado the paginaCheckinIdentificado to set
+	 */
+	public void setPaginaCheckinIdentificado(PaginaJuego paginaCheckinIdentificado) {
+		this.paginaCheckinIdentificado = paginaCheckinIdentificado;
 	}
 	
 	

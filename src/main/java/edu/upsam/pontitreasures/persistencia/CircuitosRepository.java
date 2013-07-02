@@ -21,4 +21,9 @@ public interface CircuitosRepository {
 	 */
 	Circuito recuperarPorId(Long circuitoId);
 
+	/**
+	 * @param circuito
+	 */
+	void agrega(Circuito circuito);
+
 }

@@ -119,3 +119,13 @@ span.errorMessages {
 #registrar{
 	float: right;
 }
+
+.field.multi {
+    float: left;
+    padding-right: 10%;
+    width: 30%;
+}
+
+.field.full {
+    clear: both;
+}

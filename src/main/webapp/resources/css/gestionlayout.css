@@ -21,7 +21,7 @@ i {
 	color: #FFCD46;
 }
 
-.listado .elemento > .caza{
+.listado .elemento > .item{
     border-left: 3px solid transparent;
     overflow: hidden;
     padding: 0 13px;		
@@ -67,7 +67,7 @@ i {
     visibility: hidden;	
 }
 
-.listado .elemento:hover > .caza{
+.listado .elemento:hover > .item{
     border-color: #FF7046;		
 }
 

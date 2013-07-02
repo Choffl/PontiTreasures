@@ -46,7 +46,7 @@ public class PaginasJPARepository implements PaginasRepository {
 	}
 
 	@Override
-	public void persist(PaginaJuego paginaJuego) {
+	public void agregar(PaginaJuego paginaJuego) {
 		entityManager.persist(paginaJuego);
 	}
 

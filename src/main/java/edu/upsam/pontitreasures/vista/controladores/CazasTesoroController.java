@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.upsam.pontitreasures.dominio.CazaTesoro;
 import edu.upsam.pontitreasures.dominio.Circuito;
+import edu.upsam.pontitreasures.dominio.PaginaJuego;
 import edu.upsam.pontitreasures.dominio.Usuario;
 import edu.upsam.pontitreasures.servicios.CazasTerosoroServicio;
 import edu.upsam.pontitreasures.servicios.CircuitosServicio;
+import edu.upsam.pontitreasures.servicios.PaginasServicio;
 import edu.upsam.pontitreasures.servicios.UsuariosServicio;
 import edu.upsam.pontitreasures.vista.formularios.CazaForm;
 
@@ -34,6 +36,9 @@ public class CazasTesoroController {
 	@Autowired
 	private CircuitosServicio circuitosServicio;
 	
+	@Autowired
+	private PaginasServicio paginasServicio;
+	
 	/**
 	 * Muestra todas las cazas
 	 * <strong>SE DEBE LIMITAR SU NUMERO</strong>
@@ -44,6 +49,7 @@ public class CazasTesoroController {
 		model.addAttribute("gestores", usuariosServicio.recuperarGestores());
 		model.addAttribute("circuitos", circuitosServicio.recuperarTodos());
 		model.addAttribute("seccion", "Cazas del Tesoro");
+		model.addAttribute("paginas", paginasServicio.recuperarTodas());
 		model.addAttribute("cazaForm", new CazaForm());
 		return cazasTerosoroServicio.recuperarTodos();
 	}
@@ -56,10 +62,15 @@ public class CazasTesoroController {
 	 * @return
 	 */
 	@RequestMapping(value="/caza", method=RequestMethod.POST)
-	public String altaUsuario(@Valid CazaForm cazaForm, Model model, Errors errors){
+	public String altaCaza(@Valid CazaForm cazaForm, Model model, Errors errors){
 		Circuito circuito = circuitosServicio.recuperarPorId(cazaForm.getCircuitoId());
 		Usuario gestor = usuariosServicio.recuperarPorId(cazaForm.getGestorId());
-		cazasTerosoroServicio.alta(cazaForm.getNombre(), cazaForm.getValorFechaInicio(), cazaForm.getValorFechaFin(), circuito, gestor);
+		PaginaJuego paginaPremioAnonimo = paginasServicio.recuperarPorId(cazaForm.getIdPaginaPremioAnonimo());
+		PaginaJuego paginaPremioIdentificado = paginasServicio.recuperarPorId(cazaForm.getIdPaginaPremioIdentificado());
+		Integer condicionPremio = Integer.valueOf(cazaForm.getPremio());
+		Integer condicionMencion = Integer.valueOf(cazaForm.getMencion());
+		cazasTerosoroServicio.alta(cazaForm.getNombre(), circuito, gestor, 
+				paginaPremioAnonimo, paginaPremioIdentificado, condicionPremio, condicionMencion);
 		return "redirect:/cazas";
 	}
 

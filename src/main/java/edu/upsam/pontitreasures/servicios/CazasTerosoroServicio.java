@@ -8,6 +8,7 @@ import java.util.Date;
 
 import edu.upsam.pontitreasures.dominio.CazaTesoro;
 import edu.upsam.pontitreasures.dominio.Circuito;
+import edu.upsam.pontitreasures.dominio.PaginaJuego;
 import edu.upsam.pontitreasures.dominio.Usuario;
 
 /**
@@ -27,8 +28,23 @@ public interface CazasTerosoroServicio {
 	 * @param fechaFin
 	 * @param circuito
 	 * @param gestor
+	 * @param condicionMencion 
+	 * @param condicionPremio 
+	 * @param paginaPremioIdentificado 
+	 * @param paginaPremioAnonimo 
 	 * @return
 	 */
-	CazaTesoro alta(String nombre, Date fechaInicio, Date fechaFin, Circuito circuito, Usuario gestor);
+	void alta(String nombre, Circuito circuito, Usuario gestor, PaginaJuego paginaPremioAnonimo, PaginaJuego paginaPremioIdentificado, Integer condicionPremio, Integer condicionMencion);
+	
+	/**
+	 * @return
+	 */
+	Collection<CazaTesoro> recuperarActivas();
+	
+	/**
+	 * @param id
+	 * @return
+	 */
+	CazaTesoro recuperarPorId(Long id);
 
 }

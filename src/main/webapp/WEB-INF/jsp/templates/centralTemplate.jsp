@@ -42,7 +42,8 @@
 				<nav id="aplicacion">
 					<ul>
 						<li class="acciones"><a href="#">Cuenta</a></li>
-						<li class="acciones"><a href="#">Logout</a></li>
+						<s:url value="/aplicacion/logout" var="logoutURL"/>
+						<li class="acciones"><a href="${logoutURL}">Logout</a></li>
 
 					</ul>
 				</nav>

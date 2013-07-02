@@ -20,6 +20,10 @@
 	    	<put-attribute name="contenido" value="/WEB-INF/jsp/alta.jsp" />
 	    </definition>
 	    
+	   	<definition name="aplicacion/jugador/app" extends="full_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/juegaApp.jsp" />
+	    </definition>
+	    
 	   	<!-- VISTAS CORRESPONDIENTES A CAZAS -->
 	    <definition name="cazas" extends="central_template">
 	    	<put-attribute name="contenido" value="/WEB-INF/jsp/cazas.jsp" />

@@ -32,6 +32,16 @@ public class EtiquetaForm implements Serializable{
 	 * 
 	 */
 	private String longuitud;
+	
+	/**
+	 * 
+	 */
+	private Long idPaginaAnonimo;
+	
+	/**
+	 * 
+	 */
+	private Long idPaginaIdentificado;
 
 	/**
 	 * @return the codigo
@@ -87,6 +97,34 @@ public class EtiquetaForm implements Serializable{
 	 */
 	public void setLonguitud(String longuitud) {
 		this.longuitud = longuitud;
+	}
+
+	/**
+	 * @return the idPaginaAnonimo
+	 */
+	public Long getIdPaginaAnonimo() {
+		return idPaginaAnonimo;
+	}
+
+	/**
+	 * @param idPaginaAnonimo the idPaginaAnonimo to set
+	 */
+	public void setIdPaginaAnonimo(Long idPaginaAnonimo) {
+		this.idPaginaAnonimo = idPaginaAnonimo;
+	}
+
+	/**
+	 * @return the idPaginaIdentificado
+	 */
+	public Long getIdPaginaIdentificado() {
+		return idPaginaIdentificado;
+	}
+
+	/**
+	 * @param idPaginaIdentificado the idPaginaIdentificado to set
+	 */
+	public void setIdPaginaIdentificado(Long idPaginaIdentificado) {
+		this.idPaginaIdentificado = idPaginaIdentificado;
 	}
 	
 	

@@ -1,1 +1,1 @@
-INSERT INTO pts.pt_usuario(id, email, password, username, tipo, version) VALUES (1, 'sofiasabariego@gmail.com', 'admin', 'admin', 'ADMIN', 0);
+INSERT INTO public.pt_usuario(id, email, password, username, tipo, version) VALUES (1, 'sofiasabariego@gmail.com', 'admin', 'admin', 'ADMIN', 0);

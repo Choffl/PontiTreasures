@@ -27,6 +27,6 @@ public interface PaginasRepository {
 	/**
 	 * @param paginaJuego
 	 */
-	void persist(PaginaJuego paginaJuego);
+	void agregar(PaginaJuego paginaJuego);
 
 }

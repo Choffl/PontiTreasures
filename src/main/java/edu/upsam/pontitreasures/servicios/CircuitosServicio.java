@@ -21,5 +21,12 @@ public interface CircuitosServicio {
 	 */
 	Circuito recuperarPorId(Long circuitoId);
 
+	/**
+	 * @param nombre
+	 * @param descripcion
+	 * @param etiquetas
+	 */
+	void alta(String nombre, String descripcion, Collection<Long> etiquetas);
+
 
 }

@@ -17,7 +17,7 @@
 	<ul class="listado">
 		<c:forEach items="${etiquetas}" var="etiqueta">
 			<li class="elemento">
-				<div class="etiqueta">
+				<div class="item">
 					<hgroup class="nombreElemento">
 						<h2>
 							<i class="icon-qrcode"></i>
@@ -40,6 +40,7 @@
 						<li class="eliminar">
 							<s:url value="/etiquetas/{id}" var="urlEliminarEtiqueta">
 								<s:param name="id" value="${etiqueta.id}"/>
+								<s:param name="action" value="delete"/>
 							</s:url>
 							<a href="${urlEliminarEtiqueta}"><i class="icon-trash icon-2x"></i></a>
 						</li>
@@ -53,9 +54,12 @@
 	<i class="icon-plus icon-2x"></i>
 	<a href="#">Alta</a>
 </div>
+<div class="mensajes">
+	${successMsg}
+</div>
 <div id="formularioAlta" class="formDialog">
 	<div class="dialog">
-		<sf:form methodParam="POST" modelAttribute="etiquetaForm" action="etiqueta">
+		<sf:form methodParam="POST" modelAttribute="etiquetaForm" action="etiquetas/etiqueta">
 			<h2>Registra etiqueta</h2>
 			<fieldset>
 				<div class="field full">
@@ -74,7 +78,20 @@
 					<label for="latitud">Latitud</label>
 					<sf:input path="latitud" spellcheck="false" cssClass="text"/>
 				</div>
-
+				<div class="field multi">
+					<label for="idPaginaAnonimo">Pagina checkin anonimo</label>
+					<sf:select path="idPaginaAnonimo">
+						<sf:option value="Escoge..." />
+						<sf:options items="${paginas}" itemLabel="nombre" itemValue="id"/>
+					</sf:select>
+				</div>
+				<div class="field multi">
+					<label for="idPaginaIdentificado">Pagina checkin registrado</label>
+					<sf:select path="idPaginaIdentificado">
+						<sf:option value="Escoge..." />
+						<sf:options items="${paginas}" itemLabel="nombre" itemValue="id"/>
+					</sf:select>
+				</div>
 			</fieldset>
 			<fieldset class="submit">
 				<input type="submit" value="Alta" name="commit" class="submit">

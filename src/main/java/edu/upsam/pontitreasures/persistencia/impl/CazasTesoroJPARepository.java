@@ -15,6 +15,8 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import edu.upsam.pontitreasures.dominio.CazaTesoro;
+import edu.upsam.pontitreasures.dominio.Circuito;
+import edu.upsam.pontitreasures.dominio.Jugador;
 import edu.upsam.pontitreasures.persistencia.CazasTesoroRepository;
 
 /**
@@ -39,6 +41,31 @@ public class CazasTesoroJPARepository implements CazasTesoroRepository {
 		 
 		TypedQuery<CazaTesoro> typedQuery = entityManager.createQuery(criteriaQuery);
 		return typedQuery.getResultList();
+	}
+
+
+	@Override
+	public Collection<CazaTesoro> recuperarPor(String propiedad, Object valor) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<CazaTesoro> criteriaQuery = criteriaBuilder.createQuery(CazaTesoro.class);
+		Root<CazaTesoro> root = criteriaQuery.from(CazaTesoro.class);
+		
+		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(propiedad), valor));
+		 
+		TypedQuery<CazaTesoro> typedQuery = entityManager.createQuery(criteriaQuery);
+		return typedQuery.getResultList();
+	}
+
+
+	@Override
+	public CazaTesoro recuperarPorId(Long id) {
+		return entityManager.find(CazaTesoro.class, id);
+	}
+
+
+	@Override
+	public void agregar(CazaTesoro cazaTesoro) {
+		 entityManager.persist(cazaTesoro);
 	}
 
 }

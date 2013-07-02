@@ -44,7 +44,7 @@ public class PaginasServicioImpl implements PaginasServicio {
 	public PaginaJuego alta(String nombre, String descripcion, byte[] paginaHtml) {
 		PaginaJuego paginaJuego = new PaginaJuego(nombre,descripcion);
 		paginaJuego.setPaginaHtml(paginaHtml);
-		paginasRepository.persist(paginaJuego);
+		paginasRepository.agregar(paginaJuego);
 		return paginaJuego;
 		
 	}

@@ -35,11 +35,11 @@
 			</p>
 			<p>
 				<span class="tituloInfo">Pista para anonimos:</span>
-				<span class="contenidoInfo">Nombre la pagina jQuery para anonimos.</span>
+				<span class="contenidoInfo">${etiqueta.paginaCheckinAnonimo.nombre}</span>
 			</p>
 			<p>
 				<span class="tituloInfo">Pista para identificados:</span>
-				<span class="contenidoInfo">Nombre la pagina jQuery para identificados.</span>
+				<span class="contenidoInfo">${etiqueta.paginaCheckinIdentificado.descripcion}</span>
 			</p>
 			<p class="novisible">
 				<span class="tituloInfo">Latitud:</span>

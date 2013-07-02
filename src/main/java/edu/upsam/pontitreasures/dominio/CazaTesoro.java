@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,6 +46,16 @@ public class CazaTesoro implements Serializable {
 	private String nombre;
 	
 	/**
+	 * 
+	 */
+	private Integer numeroCheckinPremio;
+	
+	/**
+	 * 
+	 */
+	private Integer numeroCheckinMencion;
+	
+	/**
 	 * Circuito sobre el que se realiza la caza del tesoro.
 	 */
 	@ManyToOne
@@ -66,6 +78,25 @@ public class CazaTesoro implements Serializable {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaFin;
+	
+	/**
+	 * 
+	 */
+	@Enumerated(EnumType.STRING)
+	private EstadoCaza estadoCaza;
+	
+	/**
+	 * 
+	 */
+	@ManyToOne
+	private PaginaJuego paginaPremioAnonimo;
+	
+	/**
+	 * 
+	 */
+	@ManyToOne
+	private PaginaJuego paginaPremioIdentificado;
+	
 	
 
 	/* (non-Javadoc)
@@ -174,6 +205,76 @@ public class CazaTesoro implements Serializable {
 	 */
 	public Long getId() {
 		return id;
+	}
+
+	/**
+	 * @return the numeroCheckinPremio
+	 */
+	public Integer getNumeroCheckinPremio() {
+		return numeroCheckinPremio;
+	}
+
+	/**
+	 * @param numeroCheckinPremio the numeroCheckinPremio to set
+	 */
+	public void setNumeroCheckinPremio(Integer numeroCheckinPremio) {
+		this.numeroCheckinPremio = numeroCheckinPremio;
+	}
+
+	/**
+	 * @return the numeroCheckinMencion
+	 */
+	public Integer getNumeroCheckinMencion() {
+		return numeroCheckinMencion;
+	}
+
+	/**
+	 * @param numeroCheckinMencion the numeroCheckinMencion to set
+	 */
+	public void setNumeroCheckinMencion(Integer numeroCheckinMencion) {
+		this.numeroCheckinMencion = numeroCheckinMencion;
+	}
+
+	/**
+	 * @return the estadoCaza
+	 */
+	public EstadoCaza getEstadoCaza() {
+		return estadoCaza;
+	}
+
+	/**
+	 * @param estadoCaza the estadoCaza to set
+	 */
+	public void setEstadoCaza(EstadoCaza estadoCaza) {
+		this.estadoCaza = estadoCaza;
+	}
+
+	/**
+	 * @return the paginaPremioAnonimo
+	 */
+	public PaginaJuego getPaginaPremioAnonimo() {
+		return paginaPremioAnonimo;
+	}
+
+	/**
+	 * @param paginaPremioAnonimo the paginaPremioAnonimo to set
+	 */
+	public void setPaginaPremioAnonimo(PaginaJuego paginaPremioAnonimo) {
+		this.paginaPremioAnonimo = paginaPremioAnonimo;
+	}
+
+	/**
+	 * @return the paginaPremioIdentificado
+	 */
+	public PaginaJuego getPaginaPremioIdentificado() {
+		return paginaPremioIdentificado;
+	}
+
+	/**
+	 * @param paginaPremioIdentificado the paginaPremioIdentificado to set
+	 */
+	public void setPaginaPremioIdentificado(PaginaJuego paginaPremioIdentificado) {
+		this.paginaPremioIdentificado = paginaPremioIdentificado;
 	}
 	
 	

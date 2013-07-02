@@ -36,5 +36,23 @@ public interface JugadoresServicio {
 	 * @param identificador
 	 */
 	void registraIdentificador(Long id, String identificador);
+	
+	/**
+	 * @param id
+	 * @param cazaTesoroId
+	 */
+	void registrarParticipacionCaza(Long id, Long cazaTesoroId);
+
+	/**
+	 * @param string
+	 * @param jugadorIdentificador
+	 * @return
+	 */
+	Jugador recuperarPorIdentificador(String jugadorIdentificador);
+	
+	/**
+	 * 
+	 */
+	Jugador registraJugadorAnonimo(String jugadorIdentificador);
 
 }

@@ -1,6 +1,7 @@
 package edu.upsam.pontitreasures.persistencia.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
+
 
 import edu.upsam.pontitreasures.dominio.Usuario;
 import edu.upsam.pontitreasures.persistencia.UsuariosRepository;
@@ -48,7 +50,8 @@ public class UsuariosJPARepository implements UsuariosRepository<Usuario>{
 		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(propiedad), valor));
 		 
 		TypedQuery<Usuario> typedQuery = entityManager.createQuery(criteriaQuery);
-		return typedQuery.getSingleResult();
+		List<Usuario> resultados = typedQuery.getResultList();
+		return resultados.isEmpty()?null:resultados.get(0);
 	}
 
 	@Override

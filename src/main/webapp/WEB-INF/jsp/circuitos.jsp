@@ -17,7 +17,7 @@
 	<ul class="listado">
 		<c:forEach items="${circuitos}" var="circuito">
 			<li class="elemento">
-				<div class="circuito">
+				<div class="item">
 					<hgroup class="nombreElemento">
 						<h2>
 							<i class="icon-road"></i>
@@ -55,7 +55,7 @@
 </div>
 <div id="formularioAlta" class="formDialog">
 	<div class="dialog">
-		<sf:form methodParam="POST" modelAttribute="circuitoForm" action="circuito">
+		<sf:form methodParam="POST" modelAttribute="circuitoForm" action="circuitos/circuito">
 			<h2>Registra cirtucito</h2>
 			<fieldset>
 				<div class="field full">
@@ -65,6 +65,12 @@
 				<div class="field full">
 					<label for="descripcion">Descripcion</label>
 					<sf:textarea path="descripcion" spellcheck="false" cssClass="text noresize"/>
+				</div>
+				<div class="field full">
+					<label for="etiquetas">Etiquetas</label>
+					<sf:select path="etiquetas" multiple="true">
+						<sf:options items="${etiquetas}" itemLabel="codigo" itemValue="id"/>
+					</sf:select>
 				</div>
 			</fieldset>
 			<fieldset class="submit">

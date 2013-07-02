@@ -25,7 +25,7 @@
 	<ul class="listado">
 		<c:forEach items="${cazas}" var="caza">
 			<li class="elemento">
-				<div id="caza1" class="caza">
+				<div class=item>
 					<hgroup class="nombreElemento">
 						<h2 class="element">
 							<i class="icon-gamepad"></i>
@@ -69,29 +69,42 @@
 </div>
 <div id="formularioAlta" class="formDialog">
 	<div class="dialog">
-		<sf:form methodParam="POST" modelAttribute="cazaForm" action="caza">
+		<sf:form methodParam="POST" modelAttribute="cazaForm" action="cazas/caza">
 			<h2>Comienza el juego</h2>
 			<fieldset>
 				<div class="field full">
 					<label for="nombre">Nombre</label>
 					<sf:input path="nombre" spellcheck="false" cssClass="text"/>
 				</div>
-
-					<div class="field multi">
-						<label for="fechaInicio">Inicio</label>
-						<sf:input path="fechaInicio" spellcheck="false" cssClass="fecha"/>
-					</div>
-					<div class="field multi">
-						<label for="fechaFin">Fin</label>
-						<sf:input path="fechaFin" spellcheck="false" cssClass="fecha"/>
+				<div class="field multi">
+					<label for="idPaginaPremioAnonimo">Pagina premio anonimo</label>
+					<sf:select path="idPaginaPremioAnonimo">
+						<sf:option value="Escoge..." />
+						<sf:options items="${paginas}" itemLabel="nombre" itemValue="id"/>
+					</sf:select>
 				</div>
-				<div class="field full">
+				<div class="field multi">
+					<label for="idPaginaPremioIdentificado">Pagina premio registrado</label>
+					<sf:select path="idPaginaPremioIdentificado">
+						<sf:option value="Escoge..." />
+						<sf:options items="${paginas}" itemLabel="nombre" itemValue="id"/>
+					</sf:select>
+				</div>
+				<div class="field multi">
+					<label for="nombre">Condicion premio</label>
+					<sf:input path="premio" spellcheck="false" cssClass="text"/>
+				</div>
+				<div class="field multi">
+					<label for="nombre">Condicion mencion</label>
+					<sf:input path="mencion" spellcheck="false" cssClass="text"/>
+				</div>
+				<div class="field multi">
 					<label for="gestor">Gestor</label>
 					<sf:select path="gestorId">
 						<sf:options items="${gestores}" itemLabel="email" itemValue="id" cssClass="text"/>
 					</sf:select>
 				</div>
-				<div class="field full">
+				<div class="field multi">
 					<label for="circuitoId">Circuito</label>
 					<sf:select path="circuitoId">
 						<sf:options items="${circuitos}" itemLabel="nombre" itemValue="id" cssClass="text"/>

@@ -17,7 +17,7 @@
 	<ul class="listado">
 		<c:forEach items="${paginas}" var="pagina">
 			<li class="elemento">
-				<div class="pagina">
+				<div class="item">
 					<hgroup class="nombreElemento">
 						<h2>
 							<i class="icon-globe"></i>

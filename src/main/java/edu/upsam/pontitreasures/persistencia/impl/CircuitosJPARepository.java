@@ -44,4 +44,10 @@ public class CircuitosJPARepository implements CircuitosRepository {
 		return entityManager.find(Circuito.class, circuitoId);
 	}
 
+	@Override
+	public void agrega(Circuito circuito) {
+		entityManager.persist(circuito);
+		
+	}
+
 }
