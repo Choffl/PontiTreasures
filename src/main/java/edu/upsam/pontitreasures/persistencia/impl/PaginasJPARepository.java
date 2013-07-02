@@ -4,6 +4,7 @@
 package edu.upsam.pontitreasures.persistencia.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +15,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
+import edu.upsam.pontitreasures.dominio.Etiqueta;
 import edu.upsam.pontitreasures.dominio.PaginaJuego;
 import edu.upsam.pontitreasures.persistencia.PaginasRepository;
 
@@ -48,6 +50,19 @@ public class PaginasJPARepository implements PaginasRepository {
 	@Override
 	public void agregar(PaginaJuego paginaJuego) {
 		entityManager.persist(paginaJuego);
+	}
+
+	@Override
+	public PaginaJuego recuperaUnicoPor(String propiedad, String valor) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<PaginaJuego> criteriaQuery = criteriaBuilder.createQuery(PaginaJuego.class);
+		Root<PaginaJuego> root = criteriaQuery.from(PaginaJuego.class);
+		
+		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(propiedad), valor));
+		 
+		TypedQuery<PaginaJuego> typedQuery = entityManager.createQuery(criteriaQuery);
+		List<PaginaJuego> resultados = typedQuery.getResultList();
+		return resultados.isEmpty()?null:resultados.get(0);
 	}
 
 }

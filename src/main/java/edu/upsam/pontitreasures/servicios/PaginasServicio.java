@@ -30,4 +30,9 @@ public interface PaginasServicio {
 	 */
 	PaginaJuego alta(String nombre, String descripcion, byte[] ficheroHtml);
 
+	/**
+	 * @return
+	 */
+	PaginaJuego recuperaPaginaCheckinIncorrecto();
+
 }

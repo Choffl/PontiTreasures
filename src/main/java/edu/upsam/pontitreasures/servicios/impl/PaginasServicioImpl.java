@@ -49,4 +49,9 @@ public class PaginasServicioImpl implements PaginasServicio {
 		
 	}
 
+	@Override
+	public PaginaJuego recuperaPaginaCheckinIncorrecto() {
+		return paginasRepository.recuperaUnicoPor("nombre","Checkin incorrecto");
+	}
+
 }

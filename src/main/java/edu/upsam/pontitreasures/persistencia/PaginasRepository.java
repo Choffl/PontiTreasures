@@ -29,4 +29,11 @@ public interface PaginasRepository {
 	 */
 	void agregar(PaginaJuego paginaJuego);
 
+	/**
+	 * @param string
+	 * @param string2
+	 * @return
+	 */
+	PaginaJuego recuperaUnicoPor(String propiedad, String valor);
+
 }
