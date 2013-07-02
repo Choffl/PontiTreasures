@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -72,6 +73,16 @@ public class CazasTesoroController {
 		cazasTerosoroServicio.alta(cazaForm.getNombre(), circuito, gestor, 
 				paginaPremioAnonimo, paginaPremioIdentificado, condicionPremio, condicionMencion);
 		return "redirect:/cazas";
+	}
+	
+	/**
+	 * 
+	 */
+	@RequestMapping(value="/{cazaId}", method=RequestMethod.GET)
+	public String verDetalle(@PathVariable("cazaId") Long cazaId, Model model){
+		model.addAttribute("seccion", "Cazas del Tesoro");
+		model.addAttribute("caza", cazasTerosoroServicio.recuperarPorId(cazaId));
+		return "caza";
 	}
 
 }

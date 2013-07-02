@@ -29,7 +29,7 @@
 					<hgroup class="nombreElemento">
 						<h2 class="element">
 							<i class="icon-gamepad"></i>
-							<s:url value="/caza/{id}" var="urlVerCaza">
+							<s:url value="/cazas/{id}" var="urlVerCaza">
 								<s:param name="id" value="${caza.id}"/>
 							</s:url>
 							<a href="${urlVerCaza}">${caza.nombre}</a>

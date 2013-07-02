@@ -2,7 +2,7 @@ package edu.upsam.pontitreasures.vista.json;
 
 public class CheckinJSON {
 	
-	private String jugadorIdentidicador;
+	private String jugadorIdentificador;
 	private String codigoQR;
 	private String cazaId;
 	private String latitud;
@@ -11,14 +11,14 @@ public class CheckinJSON {
 	/**
 	 * @return the judadorIdentidicador
 	 */
-	public String getJugadorIdentidicador() {
-		return jugadorIdentidicador;
+	public String getJugadorIdentificador() {
+		return jugadorIdentificador;
 	}
 	/**
 	 * @param judadorIdentidicador the judadorIdentidicador to set
 	 */
-	public void setJugadorIdentidicador(String judadorIdentidicador) {
-		this.jugadorIdentidicador = judadorIdentidicador;
+	public void setJugadorIdentidficador(String jugadorIdentificador) {
+		this.jugadorIdentificador = jugadorIdentificador;
 	}
 	/**
 	 * @return the codigoQR

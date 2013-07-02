@@ -112,7 +112,7 @@ public class AppController {
 	@RequestMapping(value="/checkin", method=RequestMethod.POST, produces=MediaType.TEXT_HTML_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody byte[] registrarCheckin(@RequestBody CheckinJSON checkinJSON){
-		PaginaJuego paginaJuego = checkinsServicio.registroCheckin(checkinJSON.getJugadorIdentidicador(), checkinJSON.getCodigoQR(), Long.valueOf(checkinJSON.getCazaId()), checkinJSON.getLatitud(), checkinJSON.getLongitud());
+		PaginaJuego paginaJuego = checkinsServicio.registroCheckin(checkinJSON.getJugadorIdentificador(), checkinJSON.getCodigoQR(), Long.valueOf(checkinJSON.getCazaId()), checkinJSON.getLatitud(), checkinJSON.getLongitud());
 		return paginaJuego.getPaginaHtml();
 	}
 

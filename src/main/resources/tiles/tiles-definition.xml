@@ -28,7 +28,9 @@
 	    <definition name="cazas" extends="central_template">
 	    	<put-attribute name="contenido" value="/WEB-INF/jsp/cazas.jsp" />
 	    </definition>
-	    
+	    <definition name="caza" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/caza.jsp" />
+	    </definition>
 	   	<!-- VISTAS CORRESPONDIENTES A ETIQUETAS -->
 	    <definition name="etiquetas" extends="central_template">
 	    	<put-attribute name="contenido" value="/WEB-INF/jsp/etiquetas.jsp" />
@@ -41,7 +43,9 @@
 	    <definition name="circuitos" extends="central_template">
 	    	<put-attribute name="contenido" value="/WEB-INF/jsp/circuitos.jsp" />
 	    </definition>	 	    
-	    	    
+	    <definition name="circuito" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/circuito.jsp" />
+	    </definition>	    
 	    	    
 	    <!-- VISTAS CORRESPONDIENTES A PAGINAS -->
 	    <definition name="paginas" extends="central_template">

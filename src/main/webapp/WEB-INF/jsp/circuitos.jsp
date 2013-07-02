@@ -21,7 +21,7 @@
 					<hgroup class="nombreElemento">
 						<h2>
 							<i class="icon-road"></i>
-							<s:url value="/circuito/{id}" var="urlVerCircuito">
+							<s:url value="/circuitos/{id}" var="urlVerCircuito">
 								<s:param name="id" value="${circuito.id}"/>
 							</s:url>
 							<a href="${urlVerCircuito}">${circuito.nombre}</a>
@@ -32,13 +32,13 @@
 							<a href="${urlVerCircuito}"><i class="icon-eye-open icon-2x"></i></a>
 						</li>
 						<li class="modificar">
-							<s:url value="/circuito/{id}" var="urlModificarCircuito">
+							<s:url value="/circuitos/{id}" var="urlModificarCircuito">
 								<s:param name="id" value="${circuito.id}"/>
 							</s:url>
 							<a href="${urlModificarCircuito}"><i class="icon-edit icon-2x"></i></a>
 						</li>
 						<li class="eliminar">
-							<s:url value="/circuito/{id}" var="urlEliminarCircuito">
+							<s:url value="/circuitos/{id}" var="urlEliminarCircuito">
 								<s:param name="id" value="${circuito.id}"/>
 							</s:url>
 							<a href="${urlEliminarCircuito}"><i class="icon-trash icon-2x"></i></a>

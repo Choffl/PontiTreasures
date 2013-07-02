@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -57,6 +58,16 @@ public class CircuitosController {
 	public String altaCaza(@Valid CircuitoForm circuitoForm, Model model, Errors errors){
 		circuitosServicio.alta(circuitoForm.getNombre(), circuitoForm.getDescripcion(), circuitoForm.getEtiquetas());
 		return "redirect:/circuitos";
+	}
+	
+	/**
+	 * 
+	 */
+	@RequestMapping(value="/{circuitoId}", method=RequestMethod.GET)
+	public String verDetalle(@PathVariable("circuitoId") Long circuitoId, Model model){
+		model.addAttribute("seccion", "Circuitos de etiquetas");
+		model.addAttribute("circuito", circuitosServicio.recuperarPorId(circuitoId));
+		return "circuito";
 	}
 
 }

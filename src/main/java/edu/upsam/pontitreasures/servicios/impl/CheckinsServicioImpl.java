@@ -46,6 +46,10 @@ public class CheckinsServicioImpl implements CheckinsServicio {
 		BigDecimal latitudValue = new BigDecimal(latitud);
 		BigDecimal longitudValue = new BigDecimal(longitud);
 		Etiqueta etiqueta = etiquetasServicio.recuperarPorCodigo(codigoQR);
+		
+		if(etiqueta == null){
+			return paginasServicio.recuperaPaginaCheckinIncorrecto();
+		}
 
 		if(coordenadasCorrectas(etiqueta, latitudValue, longitudValue)){
 			paginaResultado = checkinCorrecto(cazaId, jugador, etiqueta);

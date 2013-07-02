@@ -10,30 +10,34 @@
 	<article>
 		<div id="info">
 			<p class="dataInfo">
-				<span class="tituloInfo">Codigo:</span>
-				<span class="contenidoInfo">${caza.codigo}</span>
-			</p>
-			<p>
-				<span class="tituloInfo">Descripcion:</span>
-				<span class="contenidoInfo">${caza.descripcion}</span>
-			</p>
-			<p>
-				<span class="tituloInfo">Pista para anonimos:</span>
-				<span class="contenidoInfo">Nombre la pagina jQuery para anonimos.</span>
-			</p>
-			<p>
-				<span class="tituloInfo">Pista para identificados:</span>
-				<span class="contenidoInfo">Nombre la pagina jQuery para identificados.</span>
-			</p>
-			<p class="novisible">
-				<span class="tituloInfo">Latitud:</span>
-				<span id="latitud" class="contenidoInfo">${caza.latitud}</span>
-			</p>
-			<p class="novisible">
-				<span class="tituloInfo">Longitud:</span>
-				<span id="longitud" class="contenidoInfo">${caza.longitud}</span>
+				<span class="tituloInfo">Nombre:</span>
+				<span class="contenidoInfo">${caza.nombre}</span>
 			</p>
 
+			<p>
+				<span class="tituloInfo">Premio para anonimos:</span>
+				<span class="contenidoInfo">${caza.paginaPremioAnonimo.nombre}</span>
+			</p>
+			<p>
+				<span class="tituloInfo">Premio para identificados:</span>
+				<span class="contenidoInfo">${caza.paginaPremioIdentificado.nombre}</span>
+			</p>
+			<p>
+				<span class="tituloInfo">Circuito</span>
+				<span class="contenidoInfo">${caza.circuito.nombre}</span>
+			</p>
+			<p>
+				<span class="tituloInfo">Gestor</span>
+				<span class="contenidoInfo">${caza.gestor.username}</span>
+			</p>
+			<p>
+				<span class="tituloInfo">Numero de checkins para premio</span>
+				<span class="contenidoInfo">${caza.numeroCheckinPremio}</span>
+			</p>
+			<p>
+				<span class="tituloInfo">Numero de checkins para mencion</span>
+				<span class="contenidoInfo">${caza.numeroCheckinMencion}</span>
+			</p>
 		</div>
 	</article>
 </div>
