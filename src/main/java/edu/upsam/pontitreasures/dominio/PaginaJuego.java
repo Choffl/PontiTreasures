@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,38 +27,27 @@ public class PaginaJuego implements Serializable {
 	 */
 	private static final long serialVersionUID = -1266415627353084594L;
 	
-	/**
-	 * 
-	 */
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
-	/**
-	 * version de la entidad persistente: necesario para evitar problemas de concurrencia
-	 */
+
 	@Version
 	private int version;
-	
-	/**
-	 * 
-	 */
+
 	private String nombre;
-	
-	/**
-	 * 
-	 */
+
 	private String descripcion;
 	
-	/**
-	 * 
-	 */
+	@Enumerated(EnumType.STRING)
+	private TipoPagina tipoPagina;
+	
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] paginaHtml;
 
 	/**
-	 * 
+	 * Constructor por defecto
 	 */
 	public PaginaJuego() {
 	}	
@@ -100,6 +91,20 @@ public class PaginaJuego implements Serializable {
 		} else if (!paginaHtml.equals(other.paginaHtml))
 			return false;
 		return true;
+	}
+
+	/**
+	 * @return the tipoPagina
+	 */
+	public TipoPagina getTipoPagina() {
+		return tipoPagina;
+	}
+
+	/**
+	 * @param tipoPagina the tipoPagina to set
+	 */
+	public void setTipoPagina(TipoPagina tipoPagina) {
+		this.tipoPagina = tipoPagina;
 	}
 
 	/**
@@ -151,6 +156,4 @@ public class PaginaJuego implements Serializable {
 		return id;
 	}
 	
-	
-
 }

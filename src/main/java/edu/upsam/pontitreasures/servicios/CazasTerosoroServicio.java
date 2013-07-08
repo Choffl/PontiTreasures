@@ -4,7 +4,6 @@
 package edu.upsam.pontitreasures.servicios;
 
 import java.util.Collection;
-import java.util.Date;
 
 import edu.upsam.pontitreasures.dominio.CazaTesoro;
 import edu.upsam.pontitreasures.dominio.Circuito;
@@ -46,5 +45,50 @@ public interface CazasTerosoroServicio {
 	 * @return
 	 */
 	CazaTesoro recuperarPorId(Long id);
+
+	/**
+	 * @param cazaTesoro
+	 */
+	void actualizar(CazaTesoro cazaTesoro);
+
+	/**
+	 * @param cazaId
+	 * @return
+	 */
+	boolean eliminar(Long cazaId);
+
+	/**
+	 * @param cazaId
+	 */
+	void activar(Long cazaId);
+
+	/**
+	 * @param cazaId
+	 */
+	void cerrar(Long cazaId);
+
+	/**
+	 * @param cazaTesoro
+	 * @return
+	 */
+	Integer calcularCheckinsAnonimos(CazaTesoro cazaTesoro);
+
+	/**
+	 * @param cazaTesoro
+	 * @return
+	 */
+	Integer calcularCheckinsIdentificados(CazaTesoro cazaTesoro);
+
+	/**
+	 * @param cazaTesoro
+	 * @return
+	 */
+	Integer calcularPremiosAnonimos(CazaTesoro cazaTesoro);
+
+	/**
+	 * @param cazaTesoro
+	 * @return
+	 */
+	Integer calcularPremiosIdentificados(CazaTesoro cazaTesoro);
 
 }

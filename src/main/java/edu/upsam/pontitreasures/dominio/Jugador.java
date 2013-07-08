@@ -45,8 +45,39 @@ public class Jugador extends Usuario{
 	@JoinTable(name="PT_JUG_CAZA", joinColumns={@JoinColumn(name="jug_id", referencedColumnName="id")}, 
 			inverseJoinColumns={@JoinColumn(name="caza_id", referencedColumnName="id")})
 	private Collection<CazaTesoro> historicoCazas = new HashSet<CazaTesoro>();
-
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((identificador == null) ? 0 : identificador.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Jugador other = (Jugador) obj;
+		if (identificador == null) {
+			if (other.identificador != null)
+				return false;
+		} else if (!identificador.equals(other.identificador))
+			return false;
+		return true;
+	}
+
 	/**
 	 */
 	public Jugador() {
@@ -103,9 +134,5 @@ public class Jugador extends Usuario{
 	public void setHistoricoCazas(Collection<CazaTesoro> historicoCazas) {
 		this.historicoCazas = historicoCazas;
 	}
-	
-	
-	
-
 
 }

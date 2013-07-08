@@ -100,3 +100,11 @@ i {
 	display: none;
 }
 
+.mensajes {
+    border: 1px solid;
+    color: #FF7046;
+    margin-top: 1%;
+    padding: 2%;
+    text-align: center;
+}
+

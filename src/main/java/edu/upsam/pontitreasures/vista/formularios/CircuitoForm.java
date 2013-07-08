@@ -15,6 +15,8 @@ public class CircuitoForm implements Serializable{
 	 */
 	private static final long serialVersionUID = -190520065023967359L;
 	
+	private String id;
+	
 	private String nombre;
 	
 	private String descripcion;
@@ -62,7 +64,20 @@ public class CircuitoForm implements Serializable{
 	public void setEtiquetas(Collection<Long> etiquetas) {
 		this.etiquetas = etiquetas;
 	}
-	
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 	
 
 }

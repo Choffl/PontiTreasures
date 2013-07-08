@@ -1,12 +1,11 @@
 
 section {
-    min-height: 85%;
+   /* min-height: 85%;*/
 }
 
 #pagina{
     margin: auto;
-    max-width: 60%;
-	height: 100%;
+    max-width: 70%;
     background-color: #FFF;
 	/* background-color: #FFF8F0; */
 }

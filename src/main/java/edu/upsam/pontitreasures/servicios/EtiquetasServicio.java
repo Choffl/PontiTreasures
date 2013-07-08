@@ -53,4 +53,21 @@ public interface EtiquetasServicio {
 	 */
 	Etiqueta recuperarPorCodigo(String codigoQR);
 
+	/**
+	 * @param etiqueta
+	 */
+	void actualizar(Etiqueta etiqueta);
+
+	/**
+	 * @param etiqueta
+	 * @return
+	 */
+	Integer calcularCheckinsAnonimos(Etiqueta etiqueta);
+
+	/**
+	 * @param etiqueta
+	 * @return
+	 */
+	Integer calcularCheckinsIdentificados(Etiqueta etiqueta);
+
 }

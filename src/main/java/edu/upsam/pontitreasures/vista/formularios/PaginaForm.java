@@ -16,14 +16,10 @@ public class PaginaForm implements Serializable{
 	 */
 	private static final long serialVersionUID = 4876476036836377959L;
 	
-	/**
-	 * 
-	 */
+	private String id;
+	
 	private String nombre;
 	
-	/**
-	 * 
-	 */
 	private String descripcion;
 
 	/**
@@ -53,7 +49,19 @@ public class PaginaForm implements Serializable{
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 
 }

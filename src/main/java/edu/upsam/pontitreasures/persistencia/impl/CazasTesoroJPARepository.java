@@ -4,6 +4,7 @@
 package edu.upsam.pontitreasures.persistencia.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import edu.upsam.pontitreasures.dominio.CazaTesoro;
-import edu.upsam.pontitreasures.dominio.Circuito;
+import edu.upsam.pontitreasures.dominio.Checkin;
 import edu.upsam.pontitreasures.dominio.Jugador;
 import edu.upsam.pontitreasures.persistencia.CazasTesoroRepository;
 
@@ -25,7 +26,7 @@ import edu.upsam.pontitreasures.persistencia.CazasTesoroRepository;
  */
 @Repository
 public class CazasTesoroJPARepository implements CazasTesoroRepository {
-	
+
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -36,9 +37,9 @@ public class CazasTesoroJPARepository implements CazasTesoroRepository {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<CazaTesoro> criteriaQuery = criteriaBuilder.createQuery(CazaTesoro.class);
 		Root<CazaTesoro> root = criteriaQuery.from(CazaTesoro.class);
-		
+
 		criteriaQuery.select(root);
-		 
+
 		TypedQuery<CazaTesoro> typedQuery = entityManager.createQuery(criteriaQuery);
 		return typedQuery.getResultList();
 	}
@@ -49,9 +50,9 @@ public class CazasTesoroJPARepository implements CazasTesoroRepository {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<CazaTesoro> criteriaQuery = criteriaBuilder.createQuery(CazaTesoro.class);
 		Root<CazaTesoro> root = criteriaQuery.from(CazaTesoro.class);
-		
+
 		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(propiedad), valor));
-		 
+
 		TypedQuery<CazaTesoro> typedQuery = entityManager.createQuery(criteriaQuery);
 		return typedQuery.getResultList();
 	}
@@ -65,7 +66,46 @@ public class CazasTesoroJPARepository implements CazasTesoroRepository {
 
 	@Override
 	public void agregar(CazaTesoro cazaTesoro) {
-		 entityManager.persist(cazaTesoro);
+		entityManager.persist(cazaTesoro);
 	}
 
+
+	@Override
+	public void actualizar(CazaTesoro cazaTesoro) {
+		entityManager.merge(cazaTesoro);		
+	}
+
+
+	@Override
+	public void eliminar(CazaTesoro cazaTesoro) {
+		entityManager.remove(cazaTesoro);
+	}
+
+
+	@Override
+	public boolean tieneJugadores(CazaTesoro cazaTesoro) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Jugador> criteriaQuery = criteriaBuilder.createQuery(Jugador.class);
+		Root<Jugador> root = criteriaQuery.from(Jugador.class);
+
+		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("cazaTesoroActiva"), cazaTesoro));
+
+		TypedQuery<Jugador> typedQuery = entityManager.createQuery(criteriaQuery);
+		return !typedQuery.getResultList().isEmpty();
+	}
+
+	@Override
+	public boolean tieneCheckins(CazaTesoro cazaTesoro) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Checkin> criteriaQuery = criteriaBuilder.createQuery(Checkin.class);
+		Root<Checkin> root = criteriaQuery.from(Checkin.class);
+
+		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("cazaTesoro"), cazaTesoro));
+
+		TypedQuery<Checkin> typedQuery = entityManager.createQuery(criteriaQuery);
+		List<Checkin> resultados = typedQuery.getResultList();
+
+		return !resultados.isEmpty();
+	}
 }
+

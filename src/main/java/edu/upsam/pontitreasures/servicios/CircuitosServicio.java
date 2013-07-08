@@ -20,6 +20,12 @@ public interface CircuitosServicio {
 	 * @return
 	 */
 	Circuito recuperarPorId(Long circuitoId);
+	
+	/**
+	 * @param circuitoId
+	 * @return
+	 */
+	Circuito recuperarPorIdConEtiquetas(Long circuitoId);
 
 	/**
 	 * @param nombre
@@ -27,6 +33,17 @@ public interface CircuitosServicio {
 	 * @param etiquetas
 	 */
 	void alta(String nombre, String descripcion, Collection<Long> etiquetas);
+
+	/**
+	 * @param circuito
+	 */
+	void actualizar(Circuito circuito);
+
+	/**
+	 * @param circuitoId
+	 * @return
+	 */
+	boolean eliminar(Long circuitoId);
 
 
 }

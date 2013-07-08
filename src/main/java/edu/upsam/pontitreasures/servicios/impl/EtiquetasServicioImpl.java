@@ -16,9 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.upsam.pontitreasures.dominio.Etiqueta;
 import edu.upsam.pontitreasures.dominio.PaginaJuego;
+import edu.upsam.pontitreasures.persistencia.CheckinsRepository;
 import edu.upsam.pontitreasures.persistencia.EtiquetasRepository;
 import edu.upsam.pontitreasures.servicios.EtiquetasServicio;
-import edu.upsam.pontitreasures.servicios.PaginasServicio;
 
 /**
  * @author ssabariego
@@ -29,6 +29,9 @@ public class EtiquetasServicioImpl implements EtiquetasServicio {
 	
 	@Autowired
 	private EtiquetasRepository etiquetasRepository;
+	
+	@Autowired
+	private CheckinsRepository checkinsRepository;
 
 
 
@@ -71,18 +74,45 @@ public class EtiquetasServicioImpl implements EtiquetasServicio {
 	@Transactional(readOnly=false, propagation=Propagation.REQUIRED)
 	public Boolean eliminar(Long etiquetaId) {
 		Boolean eliminada = Boolean.FALSE;
-		if(!etiquetasRepository.consultaAsociadoCircuito(etiquetaId)){
-			etiquetasRepository.eliminar(etiquetaId);
+		Etiqueta etiqueta = etiquetasRepository.recuperarPorId(etiquetaId);
+		if(esEliminable(etiqueta)){
+			etiquetasRepository.eliminar(etiqueta);
 			eliminada = Boolean.TRUE;
 		}
 		return eliminada;
 	}
 
-
 	@Override
 	@Transactional(readOnly=true, propagation=Propagation.SUPPORTS)
 	public Etiqueta recuperarPorCodigo(String codigoQR) {
 		return etiquetasRepository.recuperarUnicoPor("codigo", codigoQR);
+	}
+
+
+	@Override
+	@Transactional(readOnly=false, propagation=Propagation.REQUIRED)
+	public void actualizar(Etiqueta etiqueta) {
+		etiquetasRepository.actualizar(etiqueta);		
+	}
+	
+	@Override
+	@Transactional(readOnly=false, propagation=Propagation.REQUIRED)
+	public Integer calcularCheckinsAnonimos(Etiqueta etiqueta) {
+		return checkinsRepository.recuperarCheckinsAnonimos(etiqueta).size();
+	}
+
+
+	@Override
+	@Transactional(readOnly=false, propagation=Propagation.REQUIRED)
+	public Integer calcularCheckinsIdentificados(Etiqueta etiqueta) {
+		return checkinsRepository.recuperarCheckinsIdentificados(etiqueta).size();
+	}
+	
+	private boolean esEliminable(Etiqueta etiqueta) {
+		if(!etiquetasRepository.esUsadoCircuito(etiqueta) && !etiquetasRepository.tieneCheckins(etiqueta)){
+			return true;
+		}
+		return false;
 	}
 
 }

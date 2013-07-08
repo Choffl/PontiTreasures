@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.upsam.pontitreasures.dominio.CazaTesoro;
 import edu.upsam.pontitreasures.dominio.Circuito;
+import edu.upsam.pontitreasures.dominio.EstadoCaza;
 import edu.upsam.pontitreasures.persistencia.CircuitosRepository;
 import edu.upsam.pontitreasures.servicios.CircuitosServicio;
 import edu.upsam.pontitreasures.servicios.EtiquetasServicio;
@@ -47,12 +49,35 @@ public class CircuitosServicioImpl implements CircuitosServicio {
 		circuitosRepository.agrega(circuito);	
 	}
 
-	private Circuito crearCircuito(String nombre, String descripcion, Collection<Long> etiquetas) {
-		Circuito circuito = new Circuito();
-		circuito.setNombre(nombre);
-		circuito.setDescripcion(descripcion);
-		establecerEtiquetas(circuito, etiquetas);
-		return circuito;
+	@Override
+	@Transactional(readOnly=false, propagation=Propagation.REQUIRES_NEW)
+	public void actualizar(Circuito circuito) {
+		circuitosRepository.actualizar(circuito);
+	}
+	
+	@Override
+	@Transactional(readOnly=false, propagation=Propagation.REQUIRES_NEW)
+	public Circuito recuperarPorIdConEtiquetas(Long circuitoId) {
+		return circuitosRepository.recuperarPorIdConEtiquetas(circuitoId);
+	}
+	
+	@Override
+	@Transactional(readOnly=false, propagation=Propagation.REQUIRES_NEW)
+	public boolean eliminar(Long circuitoId) {
+		boolean eliminado = Boolean.FALSE;
+		Circuito circuito = circuitosRepository.recuperarPorId(circuitoId);
+		if(esEliminable(circuito)){
+			circuitosRepository.eliminar(circuito);
+			eliminado = Boolean.TRUE;
+		}
+		return eliminado;
+	}
+	
+	private boolean esEliminable(Circuito circuito) {
+		if(!circuitosRepository.esUsadoCaza(circuito)){
+			return true;
+		}
+		return false;
 	}
 
 	private void establecerEtiquetas(Circuito circuito,	Collection<Long> etiquetas) {
@@ -60,6 +85,14 @@ public class CircuitosServicioImpl implements CircuitosServicio {
 			circuito.getEtiquetas().add(etiquetasServicio.recuperarPorId(id));
 		}
 		
+	}
+
+	private Circuito crearCircuito(String nombre, String descripcion, Collection<Long> etiquetas) {
+		Circuito circuito = new Circuito();
+		circuito.setNombre(nombre);
+		circuito.setDescripcion(descripcion);
+		establecerEtiquetas(circuito, etiquetas);
+		return circuito;
 	}
 
 }

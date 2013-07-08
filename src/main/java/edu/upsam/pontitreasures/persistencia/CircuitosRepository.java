@@ -26,4 +26,26 @@ public interface CircuitosRepository {
 	 */
 	void agrega(Circuito circuito);
 
+	/**
+	 * @param circuito
+	 */
+	void actualizar(Circuito circuito);
+
+	/**
+	 * @param circuitoId
+	 * @return
+	 */
+	Circuito recuperarPorIdConEtiquetas(Long circuitoId);
+
+	/**
+	 * @param circuito
+	 * @return
+	 */
+	boolean esUsadoCaza(Circuito circuito);
+
+	/**
+	 * @param circuito
+	 */
+	void eliminar(Circuito circuito);
+
 }

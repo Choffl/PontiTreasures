@@ -6,6 +6,7 @@ package edu.upsam.pontitreasures.persistencia;
 import java.util.Collection;
 
 import edu.upsam.pontitreasures.dominio.PaginaJuego;
+import edu.upsam.pontitreasures.dominio.TipoPagina;
 
 /**
  * @author ssabariego
@@ -35,5 +36,34 @@ public interface PaginasRepository {
 	 * @return
 	 */
 	PaginaJuego recuperaUnicoPor(String propiedad, String valor);
+
+	/**
+	 * @param paginaJuego
+	 */
+	void actualizar(PaginaJuego paginaJuego);
+
+	/**
+	 * @param paginaJuego
+	 * @return
+	 */
+	boolean esUsadaCazas(PaginaJuego paginaJuego);
+	
+	/**
+	 * @param paginaJuego
+	 * @return
+	 */
+	boolean esUsadaEtiquetas(PaginaJuego paginaJuego);
+
+	/**
+	 * @param paginaJuego
+	 */
+	void eliminar(PaginaJuego paginaJuego);
+
+	/**
+	 * @param string
+	 * @param tipo
+	 * @return
+	 */
+	Collection<PaginaJuego> recuperaPor(String propiedad, Object valor);
 
 }

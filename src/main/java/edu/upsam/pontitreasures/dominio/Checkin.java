@@ -1,8 +1,10 @@
 package edu.upsam.pontitreasures.dominio;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,8 +35,12 @@ public class Checkin implements Serializable{
 	private Boolean mencion;
 	
 	private Boolean incorrecto;
+
+	@Column(precision=18, scale=14)
+	private BigDecimal latitud;
 	
-	private Boolean anonimo;
+	@Column(precision=18, scale=14)
+	private BigDecimal longitud;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
@@ -48,6 +54,8 @@ public class Checkin implements Serializable{
 	@ManyToOne
 	private Jugador jugador;
 
+	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -55,8 +63,6 @@ public class Checkin implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((cazaTesoro == null) ? 0 : cazaTesoro.hashCode());
 		result = prime * result
 				+ ((etiqueta == null) ? 0 : etiqueta.hashCode());
 		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
@@ -76,11 +82,6 @@ public class Checkin implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Checkin other = (Checkin) obj;
-		if (cazaTesoro == null) {
-			if (other.cazaTesoro != null)
-				return false;
-		} else if (!cazaTesoro.equals(other.cazaTesoro))
-			return false;
 		if (etiqueta == null) {
 			if (other.etiqueta != null)
 				return false;
@@ -205,17 +206,31 @@ public class Checkin implements Serializable{
 	}
 
 	/**
-	 * @return the anonimo
+	 * @return the latitud
 	 */
-	public Boolean getAnonimo() {
-		return anonimo;
+	public BigDecimal getLatitud() {
+		return latitud;
 	}
 
 	/**
-	 * @param anonimo the anonimo to set
+	 * @param latitud the latitud to set
 	 */
-	public void setAnonimo(Boolean anonimo) {
-		this.anonimo = anonimo;
+	public void setLatitud(BigDecimal latitud) {
+		this.latitud = latitud;
+	}
+
+	/**
+	 * @return the longitud
+	 */
+	public BigDecimal getLongitud() {
+		return longitud;
+	}
+
+	/**
+	 * @param longitud the longitud to set
+	 */
+	public void setLongitud(BigDecimal longitud) {
+		this.longitud = longitud;
 	}
 	
 	

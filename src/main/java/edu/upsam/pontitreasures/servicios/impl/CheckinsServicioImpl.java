@@ -105,7 +105,6 @@ public class CheckinsServicioImpl implements CheckinsServicio {
 		checkin.setCazaTesoro(cazaTesoro);
 		checkin.setEtiqueta(etiqueta);
 		checkin.setJugador(jugador);
-		checkin.setAnonimo(anonimo);
 		checkin.setIncorrecto(incorrecto);
 		checkin.setFecha(new Date(System.currentTimeMillis()));
 		return checkin;

@@ -40,60 +40,31 @@ public class CazaTesoro implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	/**
-	 * Nombre de la instancia del juego
-	 */
+
 	private String nombre;
 	
-	/**
-	 * 
-	 */
 	private Integer numeroCheckinPremio;
 	
-	/**
-	 * 
-	 */
 	private Integer numeroCheckinMencion;
 	
-	/**
-	 * Circuito sobre el que se realiza la caza del tesoro.
-	 */
 	@ManyToOne
 	private Circuito circuito;
 	
-	/**
-	 * Usuario gestor del juego.
-	 */
 	@ManyToOne
 	private Usuario gestor;
 	
-	/**
-	 * Fecha de inicio del juego.
-	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaInicio;
 	
-	/**
-	 * Fecha tope para poder participar.
-	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaFin;
 	
-	/**
-	 * 
-	 */
 	@Enumerated(EnumType.STRING)
 	private EstadoCaza estadoCaza;
 	
-	/**
-	 * 
-	 */
 	@ManyToOne
 	private PaginaJuego paginaPremioAnonimo;
-	
-	/**
-	 * 
-	 */
+
 	@ManyToOne
 	private PaginaJuego paginaPremioIdentificado;
 	

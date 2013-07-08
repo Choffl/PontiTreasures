@@ -1,9 +1,6 @@
 package edu.upsam.pontitreasures.vista.formularios;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
 
 
 /**
@@ -16,7 +13,8 @@ public class CazaForm implements Serializable{
 	 * id para la serializacion
 	 */
 	private static final long serialVersionUID = -3512998172152288415L;
-
+	
+	private String id;
 
 	private String nombre;
 
@@ -26,12 +24,9 @@ public class CazaForm implements Serializable{
 
 	private Long circuitoId;
 
-
 	private Long gestorId;
 
-
 	private Long idPaginaPremioIdentificado;
-
 
 	private Long idPaginaPremioAnonimo;
 
@@ -133,6 +128,19 @@ public class CazaForm implements Serializable{
 		this.idPaginaPremioAnonimo = idPaginaPremioAnonimo;
 	}
 
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
 
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 
+	
 }

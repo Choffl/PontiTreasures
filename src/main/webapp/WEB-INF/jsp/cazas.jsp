@@ -8,6 +8,13 @@
 			$('.formDialog').css("display","none");
 		});
 		$('.accionAlta a').bind('click', function(event) {
+			$('#cazaForm').find("input[type=text], input[type=hidden], textarea").val("");
+        	$('[name="idPaginaPremioAnonimo"]').val(0);
+        	$('[name="idPaginaPremioIdentificado"]').val(0);
+        	$('[name="gestorId"]').val(0);
+        	$('[name="circuitoId"]').val(0);
+        	$('#cazaForm').attr('action', 'cazas/caza');
+        	$('.mensajes').css("display","none");
 			$('.formDialog').css("display","block");	
 		});
 		$("#fechaInicio").datepicker({
@@ -18,7 +25,44 @@
 		      changeMonth: true,
 		      changeYear: true
 		});
+		$('.modificar a').bind('click', function(event) {
+			cargaDatos($(this).attr('href'));
+			return false;
+			
+		});
+		
+		if($.trim($(".mensajes").html())==''){
+			$('.mensajes').css("display","none");
+		}else{
+			$('.mensajes').css("display","block");
+		}
 	});
+	
+	function cargaDatos(url){
+		$.ajax({
+	        url: url,
+	        type: "GET",
+	        dataType: 'json',
+	        success: function (data) {
+	        	prepararFormModificacion(data);
+	        }
+	    });
+	}
+	
+	function prepararFormModificacion(data){
+    	$('input[name="nombre"]').val(data.nombre);
+    	$('input[name="premio"]').val(data.premio);
+    	$('input[name="mencion"]').val(data.mencion);
+    	$('input[name="id"]').val(data.id);
+    	$('[name="idPaginaPremioAnonimo"]').val(data.idPaginaPremioAnonimo);
+    	$('[name="idPaginaPremioIdentificado"]').val(data.idPaginaPremioIdentificado);
+    	$('[name="gestorId"]').val(data.gestorId);
+    	$('[name="circuitoId"]').val(data.circuitoId);
+    	$('#cazaForm').attr('action', 'cazas/caza?modify');
+    	$('.mensajes').css("display","none");
+    	$('.formDialog').css("display","block");
+	}
+	
 </script>
 
 <div id="cazas">
@@ -40,8 +84,9 @@
 							<a href="${urlVerCaza}"><i class="icon-eye-open icon-2x"></i></a>
 						</li>
 						<li class="mostrarGrafica">
-							<s:url value="/cazas/{id}/graficas" var="urlMostrarGraficas">
+							<s:url value="/cazas/{id}" var="urlMostrarGraficas">
 								<s:param name="id" value="${caza.id}"/>
+								<s:param name="action" value="graphs"/>
 							</s:url>
 							<a href="${urlMostrarGraficas}"><i class="icon-bar-chart icon-2x"></i></a>
 						</li>
@@ -51,17 +96,41 @@
 							</s:url>
 							<a href="${urlModificarCaza}"><i class="icon-edit icon-2x"></i></a>
 						</li>
-						<li class="eliminar">
-							<s:url value="/cazas/{id}" var="urlEliminarCaza">
-								<s:param name="id" value="${caza.id}"/>
-							</s:url>
-							<a href="${urlEliminarCaza}"><i class="icon-trash icon-2x"></i></a>
-						</li>
+						<c:if test="${caza.estadoCaza eq 'CERRADO'}">
+							<li class="eliminar">
+								<s:url value="/cazas/{id}" var="urlEliminarCaza">
+									<s:param name="id" value="${caza.id}"/>
+									<s:param name="action" value="delete"/>
+								</s:url>
+								<a href="${urlEliminarCaza}"><i class="icon-trash icon-2x"></i></a>
+							</li>
+						</c:if>
+						<c:if test="${caza.estadoCaza eq 'NUEVA'}">
+							<li class="activar">
+								<s:url value="/cazas/{id}" var="urlActivarCaza">
+									<s:param name="id" value="${caza.id}"/>
+									<s:param name="action" value="active"/>
+								</s:url>
+								<a href="${urlActivarCaza}"><i class="icon-unlock-alt icon-2x"></i></a>
+							</li>	
+						</c:if>
+						<c:if test="${caza.estadoCaza eq 'ACTIVA' }">
+							<li class="cerrar">
+								<s:url value="/cazas/{id}" var="urlCerrarCaza">
+									<s:param name="id" value="${caza.id}"/>
+									<s:param name="action" value="close"/>
+								</s:url>
+								<a href="${urlCerrarCaza}"><i class="icon-lock icon-2x"></i></a>
+							</li>	
+						</c:if>
 					</ul>		
 				</div>			
 			</li>
 		</c:forEach>
 	</ul>
+</div>
+<div class="mensajes">
+	${successMsg}
 </div>
 <div class="accionAlta">
 	<i class="icon-plus icon-2x"></i>
@@ -69,8 +138,9 @@
 </div>
 <div id="formularioAlta" class="formDialog">
 	<div class="dialog">
-		<sf:form methodParam="POST" modelAttribute="cazaForm" action="cazas/caza">
+		<sf:form id="cazaForm" methodParam="POST" modelAttribute="cazaForm" action="cazas/caza?">
 			<h2>Comienza el juego</h2>
+			<sf:hidden path="id"/>
 			<fieldset>
 				<div class="field full">
 					<label for="nombre">Nombre</label>
@@ -79,34 +149,36 @@
 				<div class="field multi">
 					<label for="idPaginaPremioAnonimo">Pagina premio anonimo</label>
 					<sf:select path="idPaginaPremioAnonimo">
-						<sf:option value="Escoge..." />
+						<sf:option value="0" label="Escoge..."/>
 						<sf:options items="${paginas}" itemLabel="nombre" itemValue="id"/>
 					</sf:select>
 				</div>
 				<div class="field multi">
 					<label for="idPaginaPremioIdentificado">Pagina premio registrado</label>
 					<sf:select path="idPaginaPremioIdentificado">
-						<sf:option value="Escoge..." />
+						<sf:option value="0" label="Escoge..."/>
 						<sf:options items="${paginas}" itemLabel="nombre" itemValue="id"/>
 					</sf:select>
 				</div>
 				<div class="field multi">
-					<label for="nombre">Condicion premio</label>
+					<label for="premio">Condicion premio</label>
 					<sf:input path="premio" spellcheck="false" cssClass="text"/>
 				</div>
 				<div class="field multi">
-					<label for="nombre">Condicion mencion</label>
+					<label for="mencion">Condicion mencion</label>
 					<sf:input path="mencion" spellcheck="false" cssClass="text"/>
 				</div>
 				<div class="field multi">
 					<label for="gestor">Gestor</label>
 					<sf:select path="gestorId">
+						<sf:option value="0" label="Escoge..."/>
 						<sf:options items="${gestores}" itemLabel="email" itemValue="id" cssClass="text"/>
 					</sf:select>
 				</div>
 				<div class="field multi">
 					<label for="circuitoId">Circuito</label>
 					<sf:select path="circuitoId">
+						<sf:option value="0" label="Escoge..."/>
 						<sf:options items="${circuitos}" itemLabel="nombre" itemValue="id" cssClass="text"/>
 					</sf:select>
 				</div>

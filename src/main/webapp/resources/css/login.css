@@ -20,8 +20,8 @@ body .dialog {
 	background: none repeat scroll 0 0 #FFF;
    	border-radius: 4px 4px 4px 4px;
    	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2), 0 1px 5px rgba(0, 0, 0, 0.2), 0 0 0 12px rgba(255, 255, 255, 0.4);
-   	margin: auto auto 2%;
-   	max-width: 20%;
+   	margin: auto auto 3%;
+   	max-width: 30%;
    	padding: 1%;
 	position:relative;
 	text-align: left;

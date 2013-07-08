@@ -37,4 +37,27 @@ public interface CazasTesoroRepository {
 	 */
 	void agregar(CazaTesoro cazaTesoro);
 
+	/**
+	 * @param cazaTesoro
+	 */
+	void actualizar(CazaTesoro cazaTesoro);
+
+	/**
+	 * @param cazaTesoro
+	 */
+	void eliminar(CazaTesoro cazaTesoro);
+
+	/**
+	 * @param cazaTesoro
+	 * @return
+	 */
+	boolean tieneJugadores(CazaTesoro cazaTesoro);
+	
+	/**
+	 * @param cazaTesoro
+	 * @return
+	 */
+	boolean tieneCheckins(CazaTesoro cazaTesoro);
+
+
 }

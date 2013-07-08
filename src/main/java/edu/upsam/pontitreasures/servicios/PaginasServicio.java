@@ -3,6 +3,7 @@ package edu.upsam.pontitreasures.servicios;
 import java.util.Collection;
 
 import edu.upsam.pontitreasures.dominio.PaginaJuego;
+import edu.upsam.pontitreasures.dominio.TipoPagina;
 
 
 /**
@@ -34,5 +35,22 @@ public interface PaginasServicio {
 	 * @return
 	 */
 	PaginaJuego recuperaPaginaCheckinIncorrecto();
+
+	/**
+	 * @param paginaJuego
+	 */
+	void actualizar(PaginaJuego paginaJuego);
+
+	/**
+	 * @param paginaId
+	 * @return
+	 */
+	boolean eliminar(Long paginaId);
+
+	/**
+	 * @param personalizable
+	 * @return
+	 */
+	Collection<PaginaJuego> recuperarPorTipo(TipoPagina tipo);
 
 }

@@ -8,9 +8,44 @@
 			$('.formDialog').css("display","none");
 		});
 		$('.accionAlta a').bind('click', function(event) {
+			$('#circuitoForm').find("input[type=text], input[type=hidden], textarea").val("");
+        	$('[name="etiquetas"]').val(0);
+        	$('#circuitoForm').attr('action', 'circuitos/circuito');
+        	$('.mensajes').css("display","none");
 			$('.formDialog').css("display","block");	
 		});
+		$('.modificar a').bind('click', function(event) {
+			cargaDatos($(this).attr('href'));
+			return false;
+		});
+		
+		if($.trim($(".mensajes").html())==''){
+			$('.mensajes').css("display","none");
+		}else{
+			$('.mensajes').css("display","block");
+		}
 	});
+	
+	function cargaDatos(url){
+		$.ajax({
+	        url: url,
+	        type: "GET",
+	        dataType: 'json',
+	        success: function (data) {
+	        	prepararFormModificacion(data);
+	        }
+	    });
+	}
+	
+	function prepararFormModificacion(data){
+    	$('input[name="nombre"]').val(data.nombre);
+    	$('[name="descripcion"]').val(data.descripcion);
+    	$('input[name="id"]').val(data.id);
+    	$('[name="etiquetas"]').val(data.etiquetas);
+    	$('#circuitoForm').attr('action', 'circuitos/circuito?modify');
+    	$('.mensajes').css("display","none");
+    	$('.formDialog').css("display","block");
+	}
 </script>
 
 <div id="circuitos">
@@ -40,6 +75,7 @@
 						<li class="eliminar">
 							<s:url value="/circuitos/{id}" var="urlEliminarCircuito">
 								<s:param name="id" value="${circuito.id}"/>
+								<s:param name="action" value="delete"/>
 							</s:url>
 							<a href="${urlEliminarCircuito}"><i class="icon-trash icon-2x"></i></a>
 						</li>
@@ -49,14 +85,18 @@
 		</c:forEach>
 	</ul>
 </div>
+<div class="mensajes">
+	${successMsg}
+</div>
 <div class="accionAlta">
 	<i class="icon-plus icon-2x"></i>
 	<a href="#">Alta</a>
 </div>
 <div id="formularioAlta" class="formDialog">
 	<div class="dialog">
-		<sf:form methodParam="POST" modelAttribute="circuitoForm" action="circuitos/circuito">
-			<h2>Registra cirtucito</h2>
+		<sf:form id="circuitoForm" methodParam="POST" modelAttribute="circuitoForm" action="circuitos/circuito">
+			<h2>Registra circuito</h2>
+			<sf:hidden path="id"/>
 			<fieldset>
 				<div class="field full">
 					<label for="nombre">Nombre</label>

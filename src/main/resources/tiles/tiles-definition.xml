@@ -31,12 +31,19 @@
 	    <definition name="caza" extends="central_template">
 	    	<put-attribute name="contenido" value="/WEB-INF/jsp/caza.jsp" />
 	    </definition>
+	    <definition name="caza/graficos" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/cazasGraficas.jsp" />
+	    </definition>
+	    
 	   	<!-- VISTAS CORRESPONDIENTES A ETIQUETAS -->
 	    <definition name="etiquetas" extends="central_template">
 	    	<put-attribute name="contenido" value="/WEB-INF/jsp/etiquetas.jsp" />
 	    </definition>
 	   	<definition name="etiqueta" extends="central_template">
 	    	<put-attribute name="contenido" value="/WEB-INF/jsp/etiqueta.jsp" />
+	    </definition>
+	    <definition name="etiqueta/graficos" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/etiquetasGraficas.jsp" />
 	    </definition>
 	    
 	   	<!-- VISTAS CORRESPONDIENTES A CIRCUITOS -->

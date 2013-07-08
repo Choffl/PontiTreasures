@@ -13,34 +13,18 @@ public class EtiquetaForm implements Serializable{
 	 */
 	private static final long serialVersionUID = -4573491340580145962L;
 	
-	/**
-	 * 
-	 */
+	private String id;
+
 	private String codigo;
-	
-	/**
-	 * 
-	 */
-	private String descripcion;
-	
-	/**
-	 * 
-	 */
-	private String latitud;
-	
-	/**
-	 * 
-	 */
-	private String longuitud;
-	
-	/**
-	 * 
-	 */
-	private Long idPaginaAnonimo;
-	
-	/**
-	 * 
-	 */
+
+	private String descripcion;	
+
+	private String latitud;	
+
+	private String longitud;	
+
+	private Long idPaginaAnonimo;	
+
 	private Long idPaginaIdentificado;
 
 	/**
@@ -86,17 +70,17 @@ public class EtiquetaForm implements Serializable{
 	}
 
 	/**
-	 * @return the longuitud
+	 * @return the longitud
 	 */
-	public String getLonguitud() {
-		return longuitud;
+	public String getLongitud() {
+		return longitud;
 	}
 
 	/**
-	 * @param longuitud the longuitud to set
+	 * @param longitud the longitud to set
 	 */
-	public void setLonguitud(String longuitud) {
-		this.longuitud = longuitud;
+	public void setLongitud(String longitud) {
+		this.longitud = longitud;
 	}
 
 	/**
@@ -125,6 +109,20 @@ public class EtiquetaForm implements Serializable{
 	 */
 	public void setIdPaginaIdentificado(Long idPaginaIdentificado) {
 		this.idPaginaIdentificado = idPaginaIdentificado;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	

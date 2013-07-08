@@ -15,8 +15,9 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
+import edu.upsam.pontitreasures.dominio.Checkin;
+import edu.upsam.pontitreasures.dominio.Circuito;
 import edu.upsam.pontitreasures.dominio.Etiqueta;
-import edu.upsam.pontitreasures.dominio.Usuario;
 import edu.upsam.pontitreasures.persistencia.EtiquetasRepository;
 
 /**
@@ -34,9 +35,9 @@ public class EtiquetasJPARepository implements EtiquetasRepository {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Etiqueta> criteriaQuery = criteriaBuilder.createQuery(Etiqueta.class);
 		Root<Etiqueta> root = criteriaQuery.from(Etiqueta.class);
-		
+
 		criteriaQuery.select(root);
-		 
+
 		TypedQuery<Etiqueta> typedQuery = entityManager.createQuery(criteriaQuery);
 		return typedQuery.getResultList();
 	}
@@ -52,13 +53,27 @@ public class EtiquetasJPARepository implements EtiquetasRepository {
 	}
 
 	@Override
-	public void eliminar(Long etiquetaId) {		
-		entityManager.remove(recuperarPorId(etiquetaId));	
+	public void eliminar(Etiqueta etiqueta) {		
+		entityManager.remove(etiqueta);	
 	}
 
 	@Override
-	public boolean consultaAsociadoCircuito(Long etiquetaId) {
-		return false;
+	public void actualizar(Etiqueta etiqueta) {
+		entityManager.merge(etiqueta);
+	}
+
+	@Override
+	public boolean esUsadoCircuito(Etiqueta etiqueta) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Circuito> criteriaQuery = criteriaBuilder.createQuery(Circuito.class);
+		Root<Circuito> root = criteriaQuery.from(Circuito.class);
+
+		criteriaQuery.select(root).where(criteriaBuilder.isMember(etiqueta, root.<Collection<Etiqueta>>get("etiquetas")));
+
+		TypedQuery<Circuito> typedQuery = entityManager.createQuery(criteriaQuery);
+		List<Circuito> resultados = typedQuery.getResultList();
+		
+		return !resultados.isEmpty();
 	}
 
 	@Override
@@ -66,13 +81,26 @@ public class EtiquetasJPARepository implements EtiquetasRepository {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Etiqueta> criteriaQuery = criteriaBuilder.createQuery(Etiqueta.class);
 		Root<Etiqueta> root = criteriaQuery.from(Etiqueta.class);
-		
+
 		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(campo), valor));
-		 
+
 		TypedQuery<Etiqueta> typedQuery = entityManager.createQuery(criteriaQuery);
 		List<Etiqueta> resultados = typedQuery.getResultList();
 		return resultados.isEmpty()?null:resultados.get(0);
+	}
+
+	@Override
+	public boolean tieneCheckins(Etiqueta etiqueta) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Checkin> criteriaQuery = criteriaBuilder.createQuery(Checkin.class);
+		Root<Checkin> root = criteriaQuery.from(Checkin.class);
+
+		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("etiqueta"), etiqueta));
+
+		TypedQuery<Checkin> typedQuery = entityManager.createQuery(criteriaQuery);
+		List<Checkin> resultados = typedQuery.getResultList();
 		
+		return !resultados.isEmpty();
 	}
 
 }

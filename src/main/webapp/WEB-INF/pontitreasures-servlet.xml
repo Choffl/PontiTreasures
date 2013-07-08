@@ -18,6 +18,9 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/"/>
 			<mvc:mapping path="/cazas/**"/>
+			<mvc:mapping path="/etiquetas/**"/>
+			<mvc:mapping path="/paginas/**"/>
+			<mvc:mapping path="/circuitos/**"/>
 			<bean class="edu.upsam.pontitreasures.vista.controladores.filtros.ControlAccesoUsuarioFiltro">
 				<property name="loginURL" value="aplicacion/login"/>
 			</bean>

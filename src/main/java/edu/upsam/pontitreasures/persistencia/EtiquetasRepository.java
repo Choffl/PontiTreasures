@@ -27,21 +27,32 @@ public interface EtiquetasRepository {
 	void agregar(Etiqueta etiqueta);
 
 	/**
-	 * @param etiquetaId
+	 * @param etiqueta
 	 */
-	void eliminar(Long etiquetaId);
+	void eliminar(Etiqueta etiqueta);
 
 	/**
-	 * @param etiquetaId
+	 * @param etiqueta
 	 * @return
 	 */
-	boolean consultaAsociadoCircuito(Long etiquetaId);
+	boolean esUsadoCircuito(Etiqueta etiqueta);
 
 	/**
 	 * @param string
 	 * @param codigoQR
 	 */
 	Etiqueta recuperarUnicoPor(String campo, String valor);
+
+	/**
+	 * @param etiqueta
+	 */
+	void actualizar(Etiqueta etiqueta);
+
+	/**
+	 * @param etiqueta
+	 * @return
+	 */
+	boolean tieneCheckins(Etiqueta etiqueta);
 
 
 }

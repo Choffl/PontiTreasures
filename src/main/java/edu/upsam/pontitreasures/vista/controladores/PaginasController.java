@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.upsam.pontitreasures.dominio.PaginaJuego;
 import edu.upsam.pontitreasures.servicios.PaginasServicio;
@@ -59,6 +60,11 @@ public class PaginasController {
 		return "pagina";
 	}
 	
+	/**
+	 * @param paginaId
+	 * @param model
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/{paginaId}/html", params="download", method=RequestMethod.GET)
 	public HttpEntity<byte[]> bajarContenidoHTML(@PathVariable("paginaId")Long paginaId, Model model){
@@ -70,6 +76,11 @@ public class PaginasController {
         return new HttpEntity<byte[]>(paginaJuego.getPaginaHtml(), header);
 	}
 	
+	/**
+	 * @param paginaId
+	 * @param model
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/{paginaId}/html", method=RequestMethod.GET, produces=MediaType.TEXT_HTML_VALUE)
 	public byte[] mostrarContenidoHTML(@PathVariable("paginaId")Long paginaId, Model model){
@@ -93,6 +104,60 @@ public class PaginasController {
 		paginasServicio.alta(paginaForm.getNombre(), paginaForm.getDescripcion(), file.getBytes());
 		return "redirect:/paginas";
 	}
+	
+	/**
+	 * 
+	 * @param cazaForm
+	 * @param model
+	 * @param errors
+	 * @return
+	 * @throws IOException 
+	 */
+	@RequestMapping(value="/pagina", method=RequestMethod.POST, params="modify")
+	public String modificaCaza(@Valid PaginaForm paginaForm, BindingResult bindingResult, @RequestParam(value="html", required=true)MultipartFile file, Errors errors) throws IOException{
+		PaginaJuego paginaJuego = paginasServicio.recuperarPorId(Long.valueOf(paginaForm.getId()));
+		if(bindingResult.hasErrors() || !isValidaFichero(file, errors)){
+			return "paginas/pagina";
+		}
+		modificarDatosPagina(paginaForm, paginaJuego, file.getBytes());		
+		paginasServicio.actualizar(paginaJuego);
+		return "redirect:/paginas";
+	}
+	
+	/**
+	 * 
+	 */
+	@RequestMapping(value="/{paginaId}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody PaginaForm recuperarCaza(@PathVariable("paginaId") Long paginaId, Model model){
+		PaginaJuego paginaJuego = paginasServicio.recuperarPorId(paginaId);
+		return crearFormularioModificacionPagina(paginaJuego);
+	}
+	
+	/**
+	 * 
+	 */
+	@RequestMapping(value="/{paginaId}", method=RequestMethod.GET, params="action=delete")
+	public String eliminar(@PathVariable("paginaId") Long paginaId, RedirectAttributes redirectAttributes){
+		if(!paginasServicio.eliminar(paginaId)){
+			redirectAttributes.addFlashAttribute("successMsg", "No se puede eliminar ya que la pagina esta en uso");
+		}
+		return "redirect:/paginas";
+	}
+	
+	private PaginaForm crearFormularioModificacionPagina(PaginaJuego paginaJuego) {
+		PaginaForm paginaForm = new PaginaForm();
+		paginaForm.setId(paginaJuego.getId().toString());
+		paginaForm.setNombre(paginaJuego.getNombre());
+		paginaForm.setDescripcion(paginaJuego.getDescripcion());
+		return paginaForm;
+	}
+	
+	private void modificarDatosPagina(PaginaForm paginaForm, PaginaJuego paginaJuego, byte[] contenido) {
+		paginaJuego.setNombre(paginaForm.getNombre());
+		paginaJuego.setDescripcion(paginaForm.getDescripcion());
+		paginaJuego.setPaginaHtml(contenido);
+	}
+
 
 	private boolean isValidaFichero(MultipartFile file, Errors errors) {
 		Boolean valido= Boolean.TRUE;
