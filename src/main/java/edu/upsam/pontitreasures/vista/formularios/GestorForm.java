@@ -13,12 +13,15 @@ public class GestorForm implements Serializable{
 	 */
 	private static final long serialVersionUID = -6265296881580304353L;
 	
+	private String id;
 
 	private String username;
 
 	private String email;
 	
 	private String password;
+	
+	private String passwordRepetido;
 
 	/**
 	 * @return the username
@@ -60,6 +63,34 @@ public class GestorForm implements Serializable{
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the passwordRepetido
+	 */
+	public String getPasswordRepetido() {
+		return passwordRepetido;
+	}
+
+	/**
+	 * @param passwordRepetido the passwordRepetido to set
+	 */
+	public void setPasswordRepetido(String passwordRepetido) {
+		this.passwordRepetido = passwordRepetido;
 	}
 	
 

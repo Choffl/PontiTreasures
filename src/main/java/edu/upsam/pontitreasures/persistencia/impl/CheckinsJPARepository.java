@@ -1,6 +1,7 @@
 package edu.upsam.pontitreasures.persistencia.impl;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import edu.upsam.pontitreasures.dominio.CazaTesoro;
 import edu.upsam.pontitreasures.dominio.Checkin;
 import edu.upsam.pontitreasures.dominio.Etiqueta;
+import edu.upsam.pontitreasures.dominio.Jugador;
 import edu.upsam.pontitreasures.persistencia.CheckinsRepository;
 
 /**
@@ -103,6 +105,90 @@ public class CheckinsJPARepository implements CheckinsRepository {
 		criteriaQuery.select(root).where(criteriaBuilder.and
 				(criteriaBuilder.equal(root.get("cazaTesoro"), cazaTesoro),
 				criteriaBuilder.isNotNull(root.get("jugador").get("email")), 
+				criteriaBuilder.equal(root.get("premio"), Boolean.TRUE)));
+
+		TypedQuery<Checkin> typedQuery = entityManager.createQuery(criteriaQuery);
+		return typedQuery.getResultList();
+	}
+
+	@Override
+	public Collection<Checkin> recuperarCheckins(Jugador jugador) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Checkin> criteriaQuery = criteriaBuilder.createQuery(Checkin.class);
+		Root<Checkin> root = criteriaQuery.from(Checkin.class);
+
+		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("jugador"), jugador));
+
+		TypedQuery<Checkin> typedQuery = entityManager.createQuery(criteriaQuery);
+		return typedQuery.getResultList();
+	}
+
+	@Override
+	public Collection<Checkin> recuperarPremios(Jugador jugador) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Checkin> criteriaQuery = criteriaBuilder.createQuery(Checkin.class);
+		Root<Checkin> root = criteriaQuery.from(Checkin.class);
+
+		criteriaQuery.select(root).where(criteriaBuilder.and
+				(criteriaBuilder.equal(root.get("jugador"), jugador),
+				criteriaBuilder.equal(root.get("premio"), Boolean.TRUE)));
+
+		TypedQuery<Checkin> typedQuery = entityManager.createQuery(criteriaQuery);
+		return typedQuery.getResultList();
+	}
+
+	@Override
+	public Collection<Checkin> buscarCheckinPor(Etiqueta etiqueta, Jugador jugador, CazaTesoro cazaTesoro, Date fechaActual) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Checkin> criteriaQuery = criteriaBuilder.createQuery(Checkin.class);
+		Root<Checkin> root = criteriaQuery.from(Checkin.class);
+
+		criteriaQuery.select(root).where(criteriaBuilder.and
+				(criteriaBuilder.equal(root.get("jugador"), jugador),
+						criteriaBuilder.equal(root.get("etiqueta"), etiqueta),
+				criteriaBuilder.equal(root.get("fecha"), fechaActual)));
+
+		TypedQuery<Checkin> typedQuery = entityManager.createQuery(criteriaQuery);
+		return typedQuery.getResultList();
+	}
+
+	@Override
+	public Collection<Checkin> recuperarCheckinsCaza(Jugador jugador, CazaTesoro cazaTesoro) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Checkin> criteriaQuery = criteriaBuilder.createQuery(Checkin.class);
+		Root<Checkin> root = criteriaQuery.from(Checkin.class);
+
+		criteriaQuery.select(root).where(criteriaBuilder.and
+				(criteriaBuilder.equal(root.get("jugador"), jugador),
+				criteriaBuilder.equal(root.get("cazaTesoro"), cazaTesoro)));
+
+		TypedQuery<Checkin> typedQuery = entityManager.createQuery(criteriaQuery);
+		return typedQuery.getResultList();
+	}
+
+	@Override
+	public Collection<Checkin> recuperarCheckinsDistintosCaza(Jugador jugador, CazaTesoro cazaTesoro) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Checkin> criteriaQuery = criteriaBuilder.createQuery(Checkin.class);
+		Root<Checkin> root = criteriaQuery.from(Checkin.class);
+
+		criteriaQuery.select(root).where(criteriaBuilder.and
+				(criteriaBuilder.equal(root.get("jugador"), jugador),
+				criteriaBuilder.equal(root.get("cazaTesoro"), cazaTesoro))).groupBy(root.get("etiqueta")).distinct(true);
+
+		TypedQuery<Checkin> typedQuery = entityManager.createQuery(criteriaQuery);
+		return typedQuery.getResultList();
+	}
+
+	@Override
+	public Collection<Checkin> recuperaPremios(Jugador jugador,	CazaTesoro cazaTesoro) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Checkin> criteriaQuery = criteriaBuilder.createQuery(Checkin.class);
+		Root<Checkin> root = criteriaQuery.from(Checkin.class);
+
+		criteriaQuery.select(root).where(criteriaBuilder.and
+				(criteriaBuilder.equal(root.get("jugador"), jugador),
+				criteriaBuilder.equal(root.get("cazaTesoro"), cazaTesoro),		
 				criteriaBuilder.equal(root.get("premio"), Boolean.TRUE)));
 
 		TypedQuery<Checkin> typedQuery = entityManager.createQuery(criteriaQuery);

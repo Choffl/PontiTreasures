@@ -53,4 +53,10 @@ public interface PaginasServicio {
 	 */
 	Collection<PaginaJuego> recuperarPorTipo(TipoPagina tipo);
 
+	/**
+	 * @param tipoPagina
+	 * @return
+	 */
+	PaginaJuego recuperarPaginaPorTipo(TipoPagina tipoPagina);
+
 }

@@ -42,5 +42,16 @@ public interface UsuariosRepository<T extends Usuario> {
 	 * @return
 	 */
 	Collection<T> recuperarPor(String string, Object valor);
+
+	/**
+	 * @param usuario
+	 */
+	void eliminar(T usuario);
+
+	/**
+	 * @param usuario
+	 * @return
+	 */
+	boolean gestionaCazas(T usuario);
 	
 }

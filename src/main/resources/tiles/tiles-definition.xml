@@ -67,7 +67,21 @@
 	    <definition name="gestores" extends="central_template">
 	    	<put-attribute name="contenido" value="/WEB-INF/jsp/gestores.jsp" />
 	    </definition>	 	    
-	    	    	 	    
+	    <definition name="gestor" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/gestor.jsp" />
+	    </definition>
+	    
+	    <!-- VISTAS CORRESPONDIENTES A GESTORES -->
+	    <definition name="jugadores" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/jugadores.jsp" />
+	    </definition>	 	    
+	    <definition name="jugador" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/jugador.jsp" />
+	    </definition>
+	    	    <definition name="jugador/graficos" extends="central_template">
+	    	<put-attribute name="contenido" value="/WEB-INF/jsp/jugadoresGraficas.jsp" />
+	    </definition>	 	    	 	    
+	    	    	 	    	 	    
 	    	    
 	    
 	</tiles-definitions>

@@ -19,20 +19,20 @@
 					<span id="anonimosColor">Anonimos</span>
 				</p>	
 				<p class="dataInfo">
-					<span class="tituloInfo">Checkins Identificados:</span>
-					<span id="numeroCheckinsIdentificados" class="contenidoInfo">${numeroCheckinsIdentificados}</span>
-				</p>
-				<p class="dataInfo">
-					<span class="tituloInfo">Checkins Anonimos:</span>
+					<span class="tituloInfo">Checkins anonimos:</span>
 					<span id="numeroCheckinsAnonimos" class="contenidoInfo">${numeroCheckinsAnonimos}</span>
 				</p>
 				<p class="dataInfo">
-					<span class="tituloInfo">Premios Identificados:</span>
-					<span id="numeroCheckinsIdentificados" class="contenidoInfo">${numeroPremiosIdentificados}</span>
+					<span class="tituloInfo">Checkins identificados:</span>
+					<span id="numeroCheckinsIdentificados" class="contenidoInfo">${numeroCheckinsIdentificados}</span>
 				</p>
 				<p class="dataInfo">
-					<span class="tituloInfo">Premios Anonimos:</span>
+					<span class="tituloInfo">Premios anonimos:</span>
 					<span id="numeroCheckinsAnonimos" class="contenidoInfo">${numeroPremiosAnonimos}</span>
+				</p>
+				<p class="dataInfo">
+					<span class="tituloInfo">Premios identificados:</span>
+					<span id="numeroCheckinsIdentificados" class="contenidoInfo">${numeroPremiosIdentificados}</span>
 				</p>
 			</article>
 		</div>	

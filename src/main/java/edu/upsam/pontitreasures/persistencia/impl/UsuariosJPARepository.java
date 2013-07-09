@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-
+import edu.upsam.pontitreasures.dominio.CazaTesoro;
 import edu.upsam.pontitreasures.dominio.Usuario;
 import edu.upsam.pontitreasures.persistencia.UsuariosRepository;
 
@@ -66,6 +66,21 @@ public class UsuariosJPARepository implements UsuariosRepository<Usuario>{
 		return typedQuery.getResultList();
 	}
 	
-	
+	@Override
+	public void eliminar(Usuario usuario) {
+		entityManager.remove(usuario);
+	}
+
+	@Override
+	public boolean gestionaCazas(Usuario usuario) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<CazaTesoro> criteriaQuery = criteriaBuilder.createQuery(CazaTesoro.class);
+		Root<CazaTesoro> root = criteriaQuery.from(CazaTesoro.class);
+		
+		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("gestor"), usuario));
+		 
+		TypedQuery<CazaTesoro> typedQuery = entityManager.createQuery(criteriaQuery);
+		return !typedQuery.getResultList().isEmpty();
+	}
 
 }

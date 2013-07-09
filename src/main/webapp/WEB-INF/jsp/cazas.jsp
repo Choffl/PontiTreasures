@@ -52,7 +52,7 @@
 	function prepararFormModificacion(data){
     	$('input[name="nombre"]').val(data.nombre);
     	$('input[name="premio"]').val(data.premio);
-    	$('input[name="mencion"]').val(data.mencion);
+    	$('input[name="distintoPremio"]').val(data.distintoPremio);
     	$('input[name="id"]').val(data.id);
     	$('[name="idPaginaPremioAnonimo"]').val(data.idPaginaPremioAnonimo);
     	$('[name="idPaginaPremioIdentificado"]').val(data.idPaginaPremioIdentificado);
@@ -161,12 +161,12 @@
 					</sf:select>
 				</div>
 				<div class="field multi">
-					<label for="premio">Condicion premio</label>
+					<label for="premio">Nº checkins para premio</label>
 					<sf:input path="premio" spellcheck="false" cssClass="text"/>
 				</div>
 				<div class="field multi">
-					<label for="mencion">Condicion mencion</label>
-					<sf:input path="mencion" spellcheck="false" cssClass="text"/>
+					<label for="distintoPremio">Nº checkins distintos para premio</label>
+					<sf:input path="distintoPremio" spellcheck="false" cssClass="text"/>
 				</div>
 				<div class="field multi">
 					<label for="gestor">Gestor</label>

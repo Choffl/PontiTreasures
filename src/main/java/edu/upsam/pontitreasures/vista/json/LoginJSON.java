@@ -4,7 +4,6 @@ public class LoginJSON {
 	
 	private String email;
 	private String password;
-	private String identificador;
 	
 	/**
 	 * @return the email
@@ -29,18 +28,6 @@ public class LoginJSON {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	/**
-	 * @return the identificador
-	 */
-	public String getIdentificador() {
-		return identificador;
-	}
-	/**
-	 * @param identificador the identificador to set
-	 */
-	public void setIdentificador(String identificador) {
-		this.identificador = identificador;
 	}
 	
 

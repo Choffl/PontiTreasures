@@ -7,6 +7,8 @@ package edu.upsam.pontitreasures.dominio;
 public enum TipoPagina {
 	
 	PERSONALIZABLE,
+	MENCION,
+	CODIGO_ERRONEO,
 	GEOLOCALIZACION_ERRONEA,
 	CAZA_ERRONEA,
 	CHECKIN_REPETIDO;

@@ -3,6 +3,9 @@
  */
 package edu.upsam.pontitreasures.servicios;
 
+import java.util.Collection;
+
+import edu.upsam.pontitreasures.dominio.CazaTesoro;
 import edu.upsam.pontitreasures.dominio.Jugador;
 
 /**
@@ -54,5 +57,41 @@ public interface JugadoresServicio {
 	 * 
 	 */
 	Jugador registraJugadorAnonimo(String jugadorIdentificador);
+
+	/**
+	 * @return
+	 */
+	Collection<Jugador> recuperarTodos();
+
+	/**
+	 * @param gestorId
+	 * @return
+	 */
+	Jugador recuperarPorId(Long gestorId);
+
+	/**
+	 * @param jugador
+	 * @return
+	 */
+	Integer calcularCheckins(Jugador jugador);
+	
+	/**
+	 * @param jugador
+	 * @return
+	 */
+	Integer calcularPremios(Jugador jugador);
+
+	/**
+	 * @param jugador
+	 * @param cazaTesoro
+	 * @return
+	 */
+	boolean tienePremio(Jugador jugador, CazaTesoro cazaTesoro);
+
+	/**
+	 * @param imei
+	 * @return
+	 */
+	Jugador recuperarPorImei(String imei);
 
 }

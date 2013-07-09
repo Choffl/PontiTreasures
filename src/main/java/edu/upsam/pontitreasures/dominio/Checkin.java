@@ -34,7 +34,6 @@ public class Checkin implements Serializable{
 	
 	private Boolean mencion;
 	
-	private Boolean incorrecto;
 
 	@Column(precision=18, scale=14)
 	private BigDecimal latitud;
@@ -42,7 +41,7 @@ public class Checkin implements Serializable{
 	@Column(precision=18, scale=14)
 	private BigDecimal longitud;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	
 	@ManyToOne
@@ -191,19 +190,6 @@ public class Checkin implements Serializable{
 		this.mencion = mencion;
 	}
 
-	/**
-	 * @return the incorrecto
-	 */
-	public Boolean getIncorrecto() {
-		return incorrecto;
-	}
-
-	/**
-	 * @param incorrecto the incorrecto to set
-	 */
-	public void setIncorrecto(Boolean incorrecto) {
-		this.incorrecto = incorrecto;
-	}
 
 	/**
 	 * @return the latitud

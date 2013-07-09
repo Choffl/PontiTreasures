@@ -13,6 +13,7 @@ import edu.upsam.pontitreasures.dominio.Checkin;
 import edu.upsam.pontitreasures.dominio.Etiqueta;
 import edu.upsam.pontitreasures.dominio.Jugador;
 import edu.upsam.pontitreasures.dominio.PaginaJuego;
+import edu.upsam.pontitreasures.dominio.TipoPagina;
 import edu.upsam.pontitreasures.persistencia.CheckinsRepository;
 import edu.upsam.pontitreasures.servicios.CazasTerosoroServicio;
 import edu.upsam.pontitreasures.servicios.CheckinsServicio;
@@ -22,6 +23,8 @@ import edu.upsam.pontitreasures.servicios.PaginasServicio;
 
 @Service
 public class CheckinsServicioImpl implements CheckinsServicio {
+	
+	private static final Integer N = 10;
 	
 	@Autowired
 	private CheckinsRepository checkinsRepository;
@@ -38,80 +41,121 @@ public class CheckinsServicioImpl implements CheckinsServicio {
 	@Autowired
 	private PaginasServicio paginasServicio;
 
+	
 	@Override
 	@Transactional(readOnly=false, propagation=Propagation.REQUIRES_NEW)
 	public PaginaJuego registroCheckin(String identificadorJugador, String codigoQR, Long cazaId, String latitud, String longitud) {
-		PaginaJuego paginaResultado = null;
+		Etiqueta etiqueta = etiquetasServicio.recuperarPorCodigo(codigoQR);
 		Jugador jugador = jugadoresServicio.recuperarPorIdentificador(identificadorJugador);
+		CazaTesoro cazaTesoro = cazasTerosoroServicio.recuperarPorId(cazaId);
+		
+		if(etiquetaNoExiste(etiqueta)){
+			return paginasServicio.recuperarPaginaPorTipo(TipoPagina.CODIGO_ERRONEO);
+		}
+		
+		if(cazaNoRegistrada(cazaTesoro, jugador)){
+			return paginasServicio.recuperarPaginaPorTipo(TipoPagina.CAZA_ERRONEA);
+		}
+		
+		if(localizacionErronea(latitud,longitud, etiqueta)){
+			return paginasServicio.recuperarPaginaPorTipo(TipoPagina.CAZA_ERRONEA);
+		}
+		
+		Date fechaActual = new Date(System.currentTimeMillis());
+		if(checkingRepetido(etiqueta, jugador, cazaTesoro, fechaActual)){
+			return paginasServicio.recuperarPaginaPorTipo(TipoPagina.CHECKIN_REPETIDO);
+		}
+		
+		Checkin checkin = null;
+		if(!jugadoresServicio.tienePremio(jugador, cazaTesoro)){
+			Integer numeroCheckinsJugador = checkinsRepository.recuperarCheckinsCaza(jugador, cazaTesoro).size();
+			Integer numeroCheckinsDistintosJugador = checkinsRepository.recuperarCheckinsDistintosCaza(jugador, cazaTesoro).size();
+			
+			if(cumpleCondicionesPremio(numeroCheckinsJugador, numeroCheckinsDistintosJugador, cazaTesoro)){
+				checkin = crearCheckin(cazaTesoro, jugador, etiqueta, fechaActual, latitud, longitud, Boolean.TRUE, Boolean.FALSE);
+				return seleccionaPaginaPremioJugador(jugador, cazaTesoro);
+			}
+		}
+		
+		if(cumpleCondicionesMencion(jugador)){
+			checkin = crearCheckin(cazaTesoro, jugador, etiqueta, fechaActual, latitud, longitud, Boolean.FALSE, Boolean.TRUE);
+			return paginasServicio.recuperarPaginaPorTipo(TipoPagina.MENCION);
+		}
+		
+		checkin = crearCheckin(cazaTesoro, jugador, etiqueta, fechaActual, latitud, longitud, Boolean.FALSE, Boolean.FALSE);
+
+		return seleccionaPaginaCheckinJugador(jugador, etiqueta);
+		
+	}
+
+	private PaginaJuego seleccionaPaginaCheckinJugador(Jugador jugador,	Etiqueta etiqueta) {
+		PaginaJuego paginaJuego = null;
+		if(jugadorAnonimo(jugador)){
+			paginaJuego = etiqueta.getPaginaCheckinAnonimo();
+		}else{
+			paginaJuego = etiqueta.getPaginaCheckinIdentificado();
+		}
+		return paginaJuego;
+	}
+
+	private PaginaJuego seleccionaPaginaPremioJugador(Jugador jugador, CazaTesoro cazaTesoro) {
+		PaginaJuego paginaJuego = null;
+		if(jugadorAnonimo(jugador)){
+			paginaJuego = cazaTesoro.getPaginaPremioAnonimo();
+		}else{
+			paginaJuego = cazaTesoro.getPaginaPremioIdentificado();
+		}
+		return paginaJuego;
+	}
+	
+	private boolean cumpleCondicionesMencion(Jugador jugador) {
+		Integer numeroCheckins = checkinsRepository.recuperarCheckins(jugador).size();
+		if(numeroCheckins % N == 0){
+			return true;
+		}
+		return false;
+	}
+
+	private boolean cumpleCondicionesPremio(Integer numeroCheckinsJugador, Integer numeroCheckinsDistintosJugador, CazaTesoro cazaTesoro) {
+		if((numeroCheckinsJugador + 1) > cazaTesoro.getNumeroCheckinPremio() && (numeroCheckinsDistintosJugador > cazaTesoro.getNumeroDistintoCheckinPremio())){
+			return true;
+		}
+		return false;
+	}
+
+	private boolean checkingRepetido(Etiqueta etiqueta, Jugador jugador, CazaTesoro cazaTesoro, Date fechaActual) {
+		return !checkinsRepository.buscarCheckinPor(etiqueta, jugador, cazaTesoro, fechaActual).isEmpty();
+	}
+
+	private boolean localizacionErronea(String latitud, String longitud, Etiqueta etiqueta) {
 		BigDecimal latitudValue = new BigDecimal(latitud);
 		BigDecimal longitudValue = new BigDecimal(longitud);
-		Etiqueta etiqueta = etiquetasServicio.recuperarPorCodigo(codigoQR);
-		
-		if(etiqueta == null){
-			return paginasServicio.recuperaPaginaCheckinIncorrecto();
-		}
-
-		if(coordenadasCorrectas(etiqueta, latitudValue, longitudValue)){
-			paginaResultado = checkinCorrecto(cazaId, jugador, etiqueta);
-		}else{
-			paginaResultado = checkinIncorrecto(cazaId, jugador, etiqueta);
-		}
-		
-
-		return paginaResultado;
-		
+		return !(etiqueta.getLatitud().stripTrailingZeros().equals(latitudValue) && etiqueta.getLongitud().stripTrailingZeros().equals(longitudValue));
 	}
 
-	private PaginaJuego checkinIncorrecto(Long cazaId, Jugador jugador, Etiqueta etiqueta) {
-		Boolean anonimo;
-		
-		if(jugadorAnonimo(jugador)){
-			anonimo = Boolean.TRUE;
-		}else{
-			anonimo = Boolean.FALSE;
-		}
-		
-		Checkin checkin = crearCheckin(cazaId, jugador, anonimo,true, etiqueta);
-		
-		checkinsRepository.agregar(checkin);
-		return paginasServicio.recuperaPaginaCheckinIncorrecto();
+	private boolean cazaNoRegistrada(CazaTesoro cazaTesoro, Jugador jugador) {
+		return jugador.getCazaTesoroActiva().equals(cazaTesoro);
 	}
 
-	private PaginaJuego checkinCorrecto(Long cazaId, Jugador jugador, Etiqueta etiqueta) {
-		PaginaJuego paginaResultado;
-		Boolean anonimo;
-		
-		if(jugadorAnonimo(jugador)){
-			paginaResultado = etiqueta.getPaginaCheckinAnonimo();
-			anonimo = Boolean.TRUE;
-		}else{
-			paginaResultado = etiqueta.getPaginaCheckinIdentificado();
-			anonimo = Boolean.FALSE;
-		}
-		
-		Checkin checkin = crearCheckin(cazaId, jugador, anonimo,false, etiqueta);
-		
-		checkinsRepository.agregar(checkin);
-		return paginaResultado;
+	private boolean etiquetaNoExiste(Etiqueta etiqueta) {
+		return etiqueta==null;
 	}
 
-	private boolean coordenadasCorrectas(Etiqueta etiqueta,	BigDecimal latitudValue, BigDecimal longitudValue) {
-		return (etiqueta.getLatitud().stripTrailingZeros().equals(latitudValue) && etiqueta.getLongitud().stripTrailingZeros().equals(longitudValue));
-	}
-
-	private Checkin crearCheckin(Long cazaId, Jugador jugador, Boolean anonimo, Boolean incorrecto, Etiqueta etiqueta) {
-		CazaTesoro cazaTesoro = cazasTerosoroServicio.recuperarPorId(cazaId);
+	private Checkin crearCheckin(CazaTesoro cazaTesoro, Jugador jugador, Etiqueta etiqueta, Date fecha, String latitud, String longitud, Boolean premio, Boolean mencion) {
 		Checkin checkin = new Checkin();
 		checkin.setCazaTesoro(cazaTesoro);
 		checkin.setEtiqueta(etiqueta);
 		checkin.setJugador(jugador);
-		checkin.setIncorrecto(incorrecto);
-		checkin.setFecha(new Date(System.currentTimeMillis()));
+		checkin.setFecha(fecha);
+		checkin.setLatitud(new BigDecimal(latitud));
+		checkin.setLongitud(new BigDecimal(longitud));
+		
+		checkinsRepository.agregar(checkin);
 		return checkin;
 	}
 
 	private boolean jugadorAnonimo(Jugador jugador) {
-		return jugador.getIdentificador().equals(jugador.getUsername());
+		return jugador.getEmail() == null;
 	}
 
 }

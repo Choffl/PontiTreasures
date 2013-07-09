@@ -73,10 +73,10 @@ public class CazasTesoroController {
 		PaginaJuego paginaPremioAnonimo = paginasServicio.recuperarPorId(cazaForm.getIdPaginaPremioAnonimo());
 		PaginaJuego paginaPremioIdentificado = paginasServicio.recuperarPorId(cazaForm.getIdPaginaPremioIdentificado());
 		Integer condicionPremio = Integer.valueOf(cazaForm.getPremio());
-		Integer condicionMencion = Integer.valueOf(cazaForm.getMencion());
+		Integer condicionDistintoPremio = Integer.valueOf(cazaForm.getDistintoPremio());
 		
 		cazasTerosoroServicio.alta(cazaForm.getNombre(), circuito, gestor, 
-				paginaPremioAnonimo, paginaPremioIdentificado, condicionPremio, condicionMencion);
+				paginaPremioAnonimo, paginaPremioIdentificado, condicionPremio, condicionDistintoPremio);
 		return "redirect:/cazas";
 	}
 	
@@ -177,7 +177,7 @@ public class CazasTesoroController {
 		CazaForm cazaForm = new CazaForm();
 		cazaForm.setId(caza.getId()!=null?caza.getId().toString():"");
 		cazaForm.setNombre(caza.getNombre());
-		cazaForm.setMencion(caza.getNumeroCheckinMencion()!=null?caza.getNumeroCheckinMencion().toString():"");
+		cazaForm.setDistintoPremio(caza.getNumeroDistintoCheckinPremio()!=null?caza.getNumeroDistintoCheckinPremio().toString():"");
 		cazaForm.setPremio(caza.getNumeroCheckinPremio()!=null?caza.getNumeroCheckinPremio().toString():"");
 		cazaForm.setCircuitoId(caza.getCircuito()!=null?caza.getCircuito().getId():0);
 		cazaForm.setGestorId(caza.getGestor()!=null?caza.getGestor().getId():0);
@@ -192,13 +192,13 @@ public class CazasTesoroController {
 		PaginaJuego paginaPremioAnonimo = paginasServicio.recuperarPorId(cazaForm.getIdPaginaPremioAnonimo());
 		PaginaJuego paginaPremioIdentificado = paginasServicio.recuperarPorId(cazaForm.getIdPaginaPremioIdentificado());
 		Integer condicionPremio = Integer.valueOf(cazaForm.getPremio());
-		Integer condicionMencion = Integer.valueOf(cazaForm.getMencion());
+		Integer condicionDistintoMencion = Integer.valueOf(cazaForm.getDistintoPremio());
 		cazaTesoro.setCircuito(circuito);
 		cazaTesoro.setGestor(gestor);
 		cazaTesoro.setPaginaPremioAnonimo(paginaPremioAnonimo);
 		cazaTesoro.setPaginaPremioIdentificado(paginaPremioIdentificado);
 		cazaTesoro.setNombre(cazaForm.getNombre());
-		cazaTesoro.setNumeroCheckinMencion(condicionMencion);
+		cazaTesoro.setNumeroDistintoCheckinPremio(condicionDistintoMencion);
 		cazaTesoro.setNumeroCheckinPremio(condicionPremio);
 	}
 

@@ -33,10 +33,12 @@
 						<li class="acciones"><a href="${urlPaginas}">Paginas</a></li>
 						<s:url value="/circuitos" var="urlCircuitos"/>							
 						<li class="acciones"><a href="${urlCircuitos}">Circuitos</a></li>
-						<s:url value="/gestores" var="urlGestores"/>							
-						<li class="acciones"><a href="${urlGestores}">Gestores</a></li>
 						<s:url value="/cazas" var="urlCazas"/>							
 						<li class="acciones"><a href="${urlCazas}">Cazas</a></li>
+						<s:url value="/gestores" var="urlGestores"/>							
+						<li class="acciones"><a href="${urlGestores}">Gestores</a></li>
+						<s:url value="/jugadores" var="urlJugadores"/>							
+						<li class="acciones"><a href="${urlJugadores}">Jugadores</a></li>
 					</ul>
 				</nav>
 				<nav id="aplicacion">
@@ -57,9 +59,6 @@
 					<tiles:insertAttribute name="contenido" />
 				</div>
 			</section>
-			<footer id="pie">
-				Derechos reservados &copy; 2012-2013
-			</footer>
 		</div>
 	</body>
 

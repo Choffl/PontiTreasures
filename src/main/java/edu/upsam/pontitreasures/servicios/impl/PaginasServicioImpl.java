@@ -79,6 +79,12 @@ public class PaginasServicioImpl implements PaginasServicio {
 		}
 		return eliminado;
 	}
+	
+	@Override
+	@Transactional(readOnly=false, propagation=Propagation.REQUIRES_NEW)
+	public PaginaJuego recuperarPaginaPorTipo(TipoPagina tipoPagina) {
+		return paginasRepository.recuperaUnicoPor("tipoPagina", tipoPagina);
+	}
 
 	private boolean esEliminable(PaginaJuego paginaJuego) {
 		if(!paginasRepository.esUsadaCazas(paginaJuego) && !paginasRepository.esUsadaEtiquetas(paginaJuego)){

@@ -45,7 +45,7 @@ public class CazaTesoro implements Serializable {
 	
 	private Integer numeroCheckinPremio;
 	
-	private Integer numeroCheckinMencion;
+	private Integer numeroDistintoCheckinPremio;
 	
 	@ManyToOne
 	private Circuito circuito;
@@ -193,17 +193,17 @@ public class CazaTesoro implements Serializable {
 	}
 
 	/**
-	 * @return the numeroCheckinMencion
+	 * @return the numeroDistintoCheckinPremio
 	 */
-	public Integer getNumeroCheckinMencion() {
-		return numeroCheckinMencion;
+	public Integer getNumeroDistintoCheckinPremio() {
+		return numeroDistintoCheckinPremio;
 	}
 
 	/**
-	 * @param numeroCheckinMencion the numeroCheckinMencion to set
+	 * @param numeroDistintoCheckinPremio the numeroDistintoCheckinPremio to set
 	 */
-	public void setNumeroCheckinMencion(Integer numeroCheckinMencion) {
-		this.numeroCheckinMencion = numeroCheckinMencion;
+	public void setNumeroDistintoCheckinPremio(Integer numeroDistintoCheckinPremio) {
+		this.numeroDistintoCheckinPremio = numeroDistintoCheckinPremio;
 	}
 
 	/**

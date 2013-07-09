@@ -35,8 +35,8 @@
 				<span class="contenidoInfo">${caza.numeroCheckinPremio}</span>
 			</p>
 			<p>
-				<span class="tituloInfo">Numero de checkins para mencion</span>
-				<span class="contenidoInfo">${caza.numeroCheckinMencion}</span>
+				<span class="tituloInfo">Numero de checkins disntintos para premio</span>
+				<span class="contenidoInfo">${caza.numeroDistintoCheckinPremio}</span>
 			</p>
 		</div>
 	</article>

@@ -13,7 +13,6 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import edu.upsam.pontitreasures.dominio.Jugador;
-import edu.upsam.pontitreasures.dominio.Usuario;
 import edu.upsam.pontitreasures.persistencia.JugadoresRepository;
 
 @Repository(value="jugadoresRepository")
@@ -21,6 +20,18 @@ public class JugadoresJPARepository implements JugadoresRepository{
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	@Override
+	public Collection<Jugador> recuperarTodos() {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Jugador> criteriaQuery = criteriaBuilder.createQuery(Jugador.class);
+		Root<Jugador> root = criteriaQuery.from(Jugador.class);
+
+		criteriaQuery.select(root);
+
+		TypedQuery<Jugador> typedQuery = entityManager.createQuery(criteriaQuery);
+		return typedQuery.getResultList();
+	}
 
 	@Override
 	public void agregar(Jugador jugador) {
@@ -60,6 +71,29 @@ public class JugadoresJPARepository implements JugadoresRepository{
 		 
 		TypedQuery<Jugador> typedQuery = entityManager.createQuery(criteriaQuery);
 		return typedQuery.getResultList();
+	}
+
+	@Override
+	public void eliminar(Jugador jugador) {
+		entityManager.remove(jugador);
+	}
+
+	@Override
+	public boolean gestionaCazas(Jugador jugador) {
+		return false;
+	}
+
+	@Override
+	public Jugador recuperarPorIdentificador(String identificador) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Jugador> criteriaQuery = criteriaBuilder.createQuery(Jugador.class);
+		Root<Jugador> root = criteriaQuery.from(Jugador.class);
+		
+		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("identificador"), identificador));
+		 
+		TypedQuery<Jugador> typedQuery = entityManager.createQuery(criteriaQuery);
+		List<Jugador> resultados = typedQuery.getResultList();
+		return resultados.isEmpty()?null:resultados.get(0);
 	}
 
 

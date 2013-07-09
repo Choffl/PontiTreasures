@@ -54,7 +54,7 @@ public class PaginasJPARepository implements PaginasRepository {
 	}
 
 	@Override
-	public PaginaJuego recuperaUnicoPor(String propiedad, String valor) {
+	public PaginaJuego recuperaUnicoPor(String propiedad, Object valor) {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<PaginaJuego> criteriaQuery = criteriaBuilder.createQuery(PaginaJuego.class);
 		Root<PaginaJuego> root = criteriaQuery.from(PaginaJuego.class);

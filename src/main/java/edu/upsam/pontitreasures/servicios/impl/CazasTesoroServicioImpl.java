@@ -58,7 +58,7 @@ public class CazasTesoroServicioImpl implements CazasTerosoroServicio {
 	@Override
 	@Transactional(readOnly=false, propagation=Propagation.REQUIRES_NEW)
 	public void alta(String nombre, Circuito circuito, Usuario gestor, PaginaJuego paginaPremioAnonimo, PaginaJuego paginaPremioIdentificado,
-			Integer condicionPremio, Integer condicionMencion) {
+			Integer condicionPremio, Integer condicionDistintoPremio) {
 		CazaTesoro cazaTesoro = new CazaTesoro();
 		cazaTesoro.setCircuito(circuito);
 		cazaTesoro.setEstadoCaza(EstadoCaza.NUEVA);
@@ -66,7 +66,7 @@ public class CazasTesoroServicioImpl implements CazasTerosoroServicio {
 		cazaTesoro.setNombre(nombre);
 		cazaTesoro.setPaginaPremioAnonimo(paginaPremioAnonimo);
 		cazaTesoro.setPaginaPremioIdentificado(paginaPremioIdentificado);
-		cazaTesoro.setNumeroCheckinMencion(condicionMencion);
+		cazaTesoro.setNumeroDistintoCheckinPremio(condicionDistintoPremio);
 		cazaTesoro.setNumeroCheckinPremio(condicionPremio);
 
 		 cazasTesoroRepository.agregar(cazaTesoro);

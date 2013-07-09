@@ -20,7 +20,7 @@ public class CazaForm implements Serializable{
 
 	private String premio;
 
-	private String mencion;
+	private String distintoPremio;
 
 	private Long circuitoId;
 
@@ -87,17 +87,17 @@ public class CazaForm implements Serializable{
 	}
 
 	/**
-	 * @return the mencion
+	 * @return the distintoPremio
 	 */
-	public String getMencion() {
-		return mencion;
+	public String getDistintoPremio() {
+		return distintoPremio;
 	}
 
 	/**
-	 * @param mencion the mencion to set
+	 * @param distintoPremio the distintoPremio to set
 	 */
-	public void setMencion(String mencion) {
-		this.mencion = mencion;
+	public void setDistintoPremio(String distintoPremio) {
+		this.distintoPremio = distintoPremio;
 	}
 
 	/**

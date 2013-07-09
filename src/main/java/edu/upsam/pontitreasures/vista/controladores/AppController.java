@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import edu.upsam.pontitreasures.dominio.CazaTesoro;
+import edu.upsam.pontitreasures.dominio.Checkin;
 import edu.upsam.pontitreasures.dominio.Jugador;
 import edu.upsam.pontitreasures.dominio.PaginaJuego;
 import edu.upsam.pontitreasures.servicios.AutenticacionServicio;
@@ -27,6 +28,7 @@ import edu.upsam.pontitreasures.servicios.PaginasServicio;
 import edu.upsam.pontitreasures.vista.controladores.excepciones.FalloServidorException;
 import edu.upsam.pontitreasures.vista.json.CazaJSON;
 import edu.upsam.pontitreasures.vista.json.CheckinJSON;
+import edu.upsam.pontitreasures.vista.json.ImeiJSON;
 import edu.upsam.pontitreasures.vista.json.JugadorJSON;
 import edu.upsam.pontitreasures.vista.json.LoginJSON;
 import edu.upsam.pontitreasures.vista.json.RegistriCazaJSON;
@@ -71,11 +73,8 @@ public class AppController {
 		try{
 			Jugador jugador = (Jugador)autenticacionServicio.autenticar(loginJSON.getEmail(), loginJSON.getPassword());
 			if(jugador != null){
-				if(jugador.getIdentificador() == null){
-					jugadoresServicio.registraIdentificador(jugador.getId(), loginJSON.getIdentificador());
-				}
 				jugadorJSON.setUserName(jugador.getUsername());
-				jugadorJSON.setIdentificador(loginJSON.getIdentificador());
+				jugadorJSON.setIdentificador(jugador.getIdentificador());
 			}
 		}catch (Exception e) {
 			throw new FalloServidorException();
@@ -99,13 +98,24 @@ public class AppController {
 		return cazasJSON;
 	}
 	
+	@RequestMapping(value="/jugador/anonimo", method=RequestMethod.POST)
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody JugadorJSON registraAnonimo(@RequestBody ImeiJSON imeiJSON){
+		Jugador jugador = jugadoresServicio.recuperarPorImei(imeiJSON.getImei());
+		if(jugador == null){
+			jugador = jugadoresServicio.registraJugadorAnonimo(imeiJSON.getImei());
+		}
+		JugadorJSON jugadorJSON = new JugadorJSON();
+		jugadorJSON.setIdentificador(jugador.getIdentificador());
+		return jugadorJSON;
+	}
+	
+	
+	
 	@RequestMapping(value="/jugador/caza", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	public void apuntarJugadorACaza(@RequestBody RegistriCazaJSON registroCaza){
 		Jugador jugador = jugadoresServicio.recuperarPorIdentificador(registroCaza.getJugadorIdentificador());
-		if(jugador == null){
-			jugador = jugadoresServicio.registraJugadorAnonimo(registroCaza.getJugadorIdentificador());
-		}
 		jugadoresServicio.registrarParticipacionCaza(jugador.getId(), Long.valueOf(registroCaza.getCazaId()));
 	}
 	
